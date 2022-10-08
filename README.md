@@ -44,17 +44,17 @@ Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomen
 
 Bahasa sederhananya, algoritma _Content Based Filtering_ digunakan untuk merekomendasikan film berdasarkan aktivitas pengguna pada masa lalu, sedangkan algoritma _Collaborative Filtering_ digunakan untuk merekomendasikan film berdasarkan rating yang paling tinggi.
 
-Saya menggunakan dataset dari kaggle, untuk dapat menggunakan dataset tersebut saya mengimport file kredensial kaggle dalam bentuk json terlebih dahulu. Maksud dari file kredensial ini adalah untuk mengatur _permission_ dataset yang nantinya akan saya _upload_. Saya juga mengimport _library pandas_ yang dibutuhkan untuk _upload_ dataset _Movie Recommendation Data_ menggunakan kode API. Untuk dapat melihat dataset _Movie Recommendation Data_ yang terdapat pada gambar 2 dataset _Movie Recommendation Data_.
+Saya menggunakan _dataset_ dari kaggle, untuk dapat menggunakan dataset tersebut saya mengimpor file kredensial kaggle dalam bentuk json terlebih dahulu. Maksud dari file kredensial ini adalah untuk mengatur _permission_ _dataset_ yang nantinya akan saya _upload_. Saya juga mengimport _library pandas_ yang dibutuhkan untuk _upload_ dataset _Movie Recommendation Data_ menggunakan kode API. Untuk dapat melihat dataset _Movie Recommendation Data_ yang terdapat pada gambar 2 dataset _Movie Recommendation Data_.
 
 ![Reommendation](https://user-images.githubusercontent.com/111235408/194678835-edc34e43-fd9f-45ad-95c2-ed1cdb8baeaa.png)
 
-Gambar 2. Dataset Movie Recommendation Data
+Gambar 2. _Dataset Movie Recommendation Data_
 
 ## Data Understanding
 
-Setelah mendownload dataset tahap selanjutnya adalah melakukan data understanding. Agar lebih memudahkan pembaca, saya membuat tabel yang dapat dilihat di Tabel 1. data understanding
+Setelah _mendownload dataset_ tahap selanjutnya adalah melakukan data _understanding_. Agar lebih memudahkan pembaca, saya membuat tabel yang dapat dilihat di Tabel 1. data _understanding_.
 
-Tabel 1. data understanding
+Tabel 1. Data _Understanding_
 
 | Sumber | [Kaggle Dataset : Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)|
 | ------------ |---------------| 
@@ -62,22 +62,22 @@ Tabel 1. data understanding
 | Kategori | Industri Hiburan |
 | Jenis dan Ukuran Berkas | ZIP 14 MB |
 
-Dataset yang digunakan pada proyek akhir _machine learning_ ini adalah dataset _Movie Recommendation Data_ yang didapat dari situs kaggle. Link dataset tersebut, berikut tautan Dataset : [Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
+_Dataset_ yang digunakan pada proyek akhir _machine learning_ ini adalah _dataset_ _Movie Recommendation Data_ yang didapat dari situs kaggle. Link _dataset_ tersebut, berikut tautan _Dataset_ : [Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
 
 
 ### Variabel-variabel pada Movie Recommendation dataset adalah sebagai berikut:
 
-- Linkss : list link movie.
-- Moviie : list movie yang tersedia.
-- Ratingg :list penilaian yang diberikan penonton terhadap movie.
-- Tagg : list kata kunci dari movie.
+- Linkss : list link film.
+- Moviie : list film yang tersedia.
+- Ratingg :list penilaian yang di berikan penonton terhadap film.
+- Tagg : list kata kunci dari film.
 
-Berikut beberapa tahapan Data Understanding diantaranya sebagai berikut:
+Berikut beberapa tahapan Data _Understanding_ diantaranya sebagai berikut:
 
-- Meload Dataset ke dalam sebuah Dataframe menggunakan pandas.
-- df.info() digunakan untuk mengecek tipe kolom pada dataset.
-- df.isna().sum() digunakan untuk mengecek apakah ada kolom yg kosong, pada dataset ini nilai kosong tidak ditemukan.
-- df.describe() digunakan untuk mendapatkan info mengenai dataset terhadap nilai rata-rata, median, banyaknya data, nilai Q1 hingga Q3 dan lain-lain.
+- Meload _dataset_ ke dalam sebuah _dataframe_ menggunakan _pandas_.
+- df.info() digunakan untuk mengecek tipe kolom pada _dataset_.
+- df.isna().sum() digunakan untuk mengecek apakah ada kolom yg kosong, pada _dataset_ ini nilai kosong tidak ditemukan.
+- df.describe() digunakan untuk mendapatkan info mengenai _dataset_ terhadap nilai rata-rata, median, banyaknya data, nilai Q1 hingga Q3 dan lain-lain.
 - len (nama_variable.unique()) menghitung panjang data _unique_ dari variable tertentu.
 
 Tahap eksplorasi penting untuk memahami variabel-variabel pada data serta korelasi antar variabel. Pemahaman terhadap variabel pada data dan korelasinya akan membantu saya dalam menentukan pendekatan atau algoritma yang cocok untuk data saya. Saya akan melakukan eksplorasi data terhadap variabel Linkss, variabel Moviie, variabel Ratingg dan variabel Tagg.
@@ -95,7 +95,7 @@ Tabel 2. Variabel Moviie
 | title |  9742 | non-null | object |
 | genres | 9742 | non-null | object |
 
-Dari tabel 2 Variable Moviie yang tertera diatas terdapat 3 kolom yang ada di variabel moviie yaitu movieId, title, dan genres. MovieId memiliki tipe data int64 sedangkan title dan genres memiliki tipe data object.
+Dari tabel 2. Variable Moviie yang tertera diatas terdapat 3 kolom yang ada di variabel moviie yaitu movieId, title, dan genres. MovieId memiliki tipe data int64 sedangkan _title_ dan _genres_ memiliki tipe data _object_.
 
 - variabel Linkss
 
@@ -122,7 +122,7 @@ Tabel 4. Variabel Ratingg
 
 Dari tabel 4. Variable Ratingg yang tertera diatas terdapat 4 kolom yang ada di variabel Ratingg yaitu userId, movieId, rating, dan timestamp. UserId, movieId, dan timestamp memiliki tipe data int64 sedangkan rating memiliki tipe data float64.
 
-Untuk melihat rating _describe_ dan memudahkan dalam melihatnya saya visualisasikan menggunakan Table 5. visualisasi rating _describe_ dibawah.
+Untuk melihat rating _describe_ dan memudahkan dalam melihatnya saya visualisasikan menggunakan Table 5. Visualisasi Rating _Describe_ dibawah.
 
 Table 5. Visualisasi Rating _Describe_
 
@@ -138,7 +138,7 @@ Table 5. Visualisasi Rating _Describe_
 | max | 610.000000 | 193609.000000 | 5.000000 | 1.537799e+09 |
 
 
-Kemudian untuk melihat visualisasi dari banyaknya _genre film_ atau menampilkan rata-rata _genre_ yg paling banyak muncul pada dataset.
+Kemudian untuk melihat visualisasi dari banyaknya _genre film_ atau menampilkan rata-rata _genre_ yg paling banyak muncul pada _dataset_.
 
 ![visualisasi data](https://user-images.githubusercontent.com/111235408/194400480-e955951c-50e6-473a-b31f-9aaa5f230296.png)
 
@@ -158,7 +158,7 @@ Menggabungkan beberapa file menggunakan fungsi _concatenate_ berdasarkan pada mo
    - ratingg
    - tagg
    
-Setelah itu mengurutkan data dan menghapus data yang sama menggunakan np. sort , sehingga dihasilkan jumlah seluruh data movie berdasarkan movieId terdapat 9742.
+Setelah itu mengurutkan data dan menghapus data yang sama menggunakan np. sort , sehingga dihasilkan jumlah seluruh data film berdasarkan movieId terdapat 9742.
 
 - Menggabungkan Seluruh User
 
@@ -205,7 +205,7 @@ Terdapat 100836 rows × 4 columns dalam penggabungan Data dengan Fitur Nama Movi
 
 ## Data Preparation
 
-Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada _missing value_ atau tidak.  Dengan menjalankan kode berikut. All_moviie.isnull().sum(). Dan ternyata hasilnya dalam tabel berikut ini :
+Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada _missing value_ atau tidak.  Dengan menjalankan kode berikut. _All_moviie.isnull().sum()_. Dan ternyata hasilnya dalam tabel berikut ini :
 
 Tabel 7. cek missing value
 
@@ -219,7 +219,7 @@ Tabel 7. cek missing value
 | genres | 0 |
 | tag | 0 |
 
-Perhatikanlah, sudah tidak terdapat _missing value_ lagi setealah dilakukan penggabungan-penggabungan terhadap variabel. Selanjutnya, saya hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, saya perlu menghapus data yang duplikat dengan fungsi drop_duplicates(). Dan pada dasarnya, method dropna() bisa digunakan untuk menghapus baris atau kolom yang mengandung _missing values_. Saya hanya perlu menentukan _axis-nya_, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
+Perhatikanlah, sudah tidak terdapat _missing value_ lagi setelah dilakukan penggabungan-penggabungan terhadap variabel. Selanjutnya, saya hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, saya perlu menghapus data yang duplikat dengan fungsi drop_duplicates(). Dan pada dasarnya, _method dropna()_ bisa digunakan untuk menghapus baris atau kolom yang mengandung _missing values_. Saya hanya perlu menentukan _axis-nya_, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
 
 - Proses dalam tahap data _preparation_ adalah dengan menghapus _Missing Value_ yang terdapat pada variabel.
 - Alasannya agar model yang dibuat memiliki tingkat prediksi yang bagus. 
@@ -244,13 +244,13 @@ Tabel 8. assign dataframe
 
 ### TF-IDF Vectorizer
 
-Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan _genre film_. Teknik ini digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap kategori _genre+. Menggunakan fungsi tfidfvectorizer() dari _library sklearn_. Selain itu saya juga melakukan Inisialisasi TfidfVectorizer dalam hal ini terdapat (1554, 24) shape yang ditemukan berarti nilai 1554 merupakan ukuran data dan 24 merupakan matrik kategori _genre_. 
+Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan _genre film_. Teknik ini digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap kategori _genre_. Menggunakan fungsi _tfidfvectorizer()_ dari _library sklearn_. Selain itu saya juga melakukan Inisialisasi _TfidfVectorizer_ dalam hal ini terdapat (1554, 24) shape yang ditemukan berarti nilai 1554 merupakan ukuran data dan 24 merupakan matrik kategori _genre_. 
 
-Perhitungan idf pada data _genre_ dengan cara melakukan fit lalu ditransformasikan ke bentuk _matrix_ dan melihat ukuran _matrix_ tfidf dengan menggunakan fungsi todense(). Selanjutnya, saya lihat _matriks_ tf-idf untuk beberapa _genre_. Dapat dilihat pada Gambar. 3 _matrix_ tfidf dibawah.
+Perhitungan idf pada data _genre_ dengan cara melakukan fit lalu ditransformasikan ke bentuk _matrix_ dan melihat ukuran _matrix_ tfidf dengan menggunakan fungsi _todense()_. Selanjutnya, saya lihat _matriks tf-idf_ untuk beberapa _genre_. Dapat dilihat pada Gambar. 3 _matrix tfidf_ dibawah.
 
 ![matrix](https://user-images.githubusercontent.com/111235408/194685122-60f0aa0d-06ea-4b55-9e86-59dfe0371168.png)
 
-Gambar 4. _Matrix_ Tfidf
+Gambar 4. _Matrix Tfidf_
 
 Selanjutnya, saya akan menghitung derajat kesamaan (_similarity degree_) antar _genre_ dengan teknik _cosine similarity_. Di sini, saya menggunakan fungsi _cosine_similarity_ dari _library_ sklearn. Berikut Gambar. 4 _Cosine Simmilarity_.
 
@@ -258,8 +258,8 @@ Selanjutnya, saya akan menghitung derajat kesamaan (_similarity degree_) antar _
 
 Gambar 5. _Cosine Simmilarity_
 
-Pada tahapan ini, saya menghitung _cosine similarity dataframe tfidf_matrix_ yang saya peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi _cosine similarity_ dari _library sklearn_, saya telah berhasil menghitung kesamaan (_similarity_) antar _genre_. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk _array_. 
-_
+Pada tahapan ini, saya menghitung _cosine similarity dataframe _tfidf matrix_ yang saya peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi _cosine similarity_ dari _library sklearn_, saya telah berhasil menghitung kesamaan (_similarity_) antar _genre_. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk _array_. 
+
 Dengan _cosine similarity_, saya berhasil mengidentifikasi kesamaan antara satu _genre film_ dengan _genre film_ lainnya. _Shape_ (1554, 1554) merupakan ukuran matriks _similarity_ dari data yang saya miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 1554 _genre_ x 1554 _genre_ (masing-masing dalam sumbu X dan Y). Artinya, saya mengidentifikasi tingkat kesamaan pada 1554 _genre film_.  
 
 Nah, dengan data kesamaan (_similarity_) _genre_ yang diperoleh dari kode sebelumnya, saya akan merekomendasikan daftar judul film yang mirip (_similar_) dengan _genre_ yang sebelumnya pernah melayani pengguna. 
@@ -305,31 +305,31 @@ Gambar 6. Output Pembagian Data
 
 ### Proses Training 
 
-Pada tahap ini, model menghitung skor kecocokan antara pengguna dan resto dengan teknik embedding. Pertama, saya melakukan proses embedding terhadap data genre dan moviie. Selanjutnya, lakukan operasi perkalian dot product antara embedding genre dan movie. Selain itu, saya juga dapat menambahkan bias untuk setiap user dan resto. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi aktivasi sigmoid. 
+Pada tahap ini, model menghitung skor kecocokan antara judul dan _genre_ dengan teknik _embedding_. Pertama, saya melakukan proses _embedding_ terhadap data _genre_ dan moviie. Selanjutnya, lakukan operasi perkalian _dot product_ antara _embedding genre_ dan _movie_. Selain itu, saya juga dapat menambahkan bias untuk setiap judul dan _genre_. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi aktivasi _sigmoid_. 
 
-Di sini, saya membuat class RecommenderNet dengan keras Model class. Kode class RecommenderNet ini terinspirasi dari tutorial dalam situs Keras dengan beberapa adaptasi sesuai kasus yang sedang saya selesaikan. 
+Di sini, saya membuat _class RecommenderNet_ dengan keras model class. Kode _class RecommenderNet_ ini terinspirasi dari tutorial dalam situs Keras dengan beberapa adaptasi sesuai kasus yang sedang saya selesaikan. 
 
-Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Langkah berikutnya, mulailah proses training. 
+Selanjutnya, lakukan proses _compile_ terhadap model. Model ini menggunakan _Binary Crossentropy_ untuk menghitung _loss function_, _Adam (Adaptive Moment Estimation)_ sebagai _optimizer_, dan _root mean squared error (RMSE)_ sebagai _metrics evaluation_. Langkah berikutnya, mulailah proses _training_. 
 
 ## Evaluation
 
 ### Mendapatkan Rekomendasi film
 
-Untuk mendapatkan rekomendasi judul film, pertama saya ambil sampel user secara acak dan definisikan variabel moviie_not_visited yang merupakan daftar resto yang belum pernah dikunjungi oleh pengguna. Hal ini karena daftar moviie_not_visited inilah yang akan menjadi film yang kita rekomendasikan. 
+Untuk mendapatkan rekomendasi judul film, pertama saya ambil sampel _user_ secara acak dan definisikan variabel moviie_not_visited yang merupakan daftar judul film yang belum pernah dikunjungi oleh pengguna. Hal ini karena daftar moviie_not_visited inilah yang akan menjadi film yang akan rekomendasikan. 
 
 Sebelumnya, pengguna telah memberi rating pada beberapa film yang telah mereka kunjungi. saya menggunakan rating ini untuk membuat rekomendasi film yang mungkin cocok untuk pengguna. Nah, film yang akan direkomendasikan tentulah film yang belum pernah ditonton oleh pengguna. 
 
-Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel moviie_visited_by_user.
+Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel _moviie_visited_by_user_.
 
-Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi model.predict() dari library Keras.
+Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi _model.predict()_ dari _library Keras_.
 
 ![hasil rekomendasi](https://user-images.githubusercontent.com/111235408/194691635-6657f430-726b-495a-a458-6246902fccad.png)
 
 Gambar 8. Hasil Rekomendasi
 
-Berhasil memberikan rekomendasi kepada user. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk user dengan 448. Dari output tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
+Berhasil memberikan rekomendasi kepada _user_. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk _user_ dengan 448. Dari _output_ tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
 
-Perhatikanlah, beberapa film rekomendasi menyediakan movie dengan berdas kepada kategori genre  yang sesuai dengan rating user. Saya memperoleh 4 _movie with high ratings from user_ diantaranya :
+Perhatikanlah, beberapa film rekomendasi menyediakan film dengan berdas kepada kategori _genre_  yang sesuai dengan rating _user_. Saya memperoleh 4 _movie with high ratings from user_ diantaranya :
 - Toy Story (1995) : Adventure|Animation|Children|Comedy|Fantasy
 - Raging Bull (1980) : Drama
 - Annie Hall (1977) : Comedy|Romance
@@ -339,7 +339,7 @@ Prediksinya cukup sesuai.
 
 ### Visualisasi Metrik
 
-Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
+Untuk melihat visualisasi proses _training_, saya plot metrik evaluasi dengan _matplotlib_. 
 
 ![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
 
@@ -365,9 +365,9 @@ Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
 
 
 
-Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu Content based Filtering dan Collaborative Filtering. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi movie yang sesuai dengan preferensi pengguna. 
+Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu _Content based Filtering_ dan _Collaborative Filtering_. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi film yang sesuai dengan preferensi pengguna. 
 
-Setiap teknik membutuhkan data yang berbeda dan bekerja dengan cara yang berbeda pula. Misalnya, pada teknik collaborative filtering, saya membutuhkan data rating dari pengguna. Sedangkan, pada content based filtering, data rating tidak diperlukan. 
+Setiap teknik membutuhkan data yang berbeda dan bekerja dengan cara yang berbeda pula. Misalnya, pada teknik _collaborative filtering_, saya membutuhkan data rating dari pengguna. Sedangkan, pada _content based filtering_, data rating tidak diperlukan. 
 
 Berikut kelebihan serta kekurangan dari ke-2 model :
 
@@ -377,9 +377,9 @@ Sedangkan _cosine similarity_ adalah salah satu teknik mengukur kesamaan yang be
 
 Secara umum, fungsi _similarity_ adalah fungsi yang menerima dua buah obyek berupa bilangan riil (0 dan 1) dan mengembalikan nilai kemiripan (similarity) antara kedua obyek tersebut berupa bilangan _riil_. _Cosine similarity_ merupakan salah satu metode pengukuran kemiripan yang populer. Metode ini digunakan untuk menghitung nilai kosinus sudut antara dua vektor dan biasanya digunakan untuk mengukur kemiripan antara dua teks/dokumen. Fungsi cosine similarity antara item A dan item B ditunjukkan.
 
-Selain itu saya juga menggunakan metode _Collaborative Filtering_, dimana _Collaborative Filtering_ merupakan algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
+Selain itu saya juga menggunakan metode _Collaborative Filtering_, dimana _Collaborative Filtering_ merupakan algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi _item_ yang mungkin diminati. 
 
-- Ketika seseorang memasuki rental VCD seringkali, ia mengalami kebimbangan disebabkan oleh begitu banyaknya pilihan film yang tersedia. Mereka yang sebelumnya tidak memiliki cukup informasi seperti dari membaca review-review film dan mereka yang memang belum memiliki tujuan pasti akan menyewa judul film apa, membutuhkan bentuk rekomendasi dari member-member lainnya. Rekomendasi yang diinginkan adalah yang bersifat personal dan yang dapat sedikit di luar dugaan, kemungkinan film yang sama sekali tidak terpikirkan namun ternyata menarik dan sesuai seleranya. Collaborative filtering memungkinkan munculnya item yang memiliki karakteristik sama sekali berbeda dari item-item yang pernah dipilih sebelumnya namun ternyata menarik bagi user bersangkutan, karena rekomendasi didasarkan pada preferensi user-user lain. Feedback yang ditangkap secara implisit berupa data biner dengan hanya didasarkan pada perilaku seorang member apakah dia menyewa (‘1’) ataukah belum menyewa (‘0’) judul film tertentu. Metode collaborative filtering yang digunakan adalah user-based collaborative filtering, item-based collaborative filtering, dan item-based collaborative filtering yang dikombinasikan dengan fitur konten. Hasil dari pengujian ketiga metode menunjukkan bahwa pada penggunaan user-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 58,8%; pada item-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 24,9%; sedangkan pada item-based collaborative filtering yang dikombinasikan dengan fitur konten terjadi kesalahan prediksi rata-rata sebanyak 24,4%. Pengkombinasian collaborative filtering dengan fitur konten mengakibatkan hasil rekomendasi yang muncul tidak lagi memiliki karakteristik rekomendasi hasil collaborative filtering. [[2]](https://digilib.uns.ac.id/dokumen/detail/26091)
+- Ketika seseorang memasuki rental VCD seringkali, ia mengalami kebimbangan disebabkan oleh begitu banyaknya pilihan film yang tersedia. Mereka yang sebelumnya tidak memiliki cukup informasi seperti dari membaca review-review film dan mereka yang memang belum memiliki tujuan pasti akan menyewa judul film apa, membutuhkan bentuk rekomendasi dari member-member lainnya. Rekomendasi yang diinginkan adalah yang bersifat personal dan yang dapat sedikit di luar dugaan, kemungkinan film yang sama sekali tidak terpikirkan namun ternyata menarik dan sesuai seleranya. _Collaborative filtering_ memungkinkan munculnya _item_ yang memiliki karakteristik sama sekali berbeda dari item-item yang pernah dipilih sebelumnya namun ternyata menarik bagi user bersangkutan, karena rekomendasi didasarkan pada preferensi user-user lain. _Feedback_ yang ditangkap secara implisit berupa data biner dengan hanya didasarkan pada perilaku seorang _member_ apakah dia menyewa (‘1’) ataukah belum menyewa (‘0’) judul film tertentu. Metode collaborative filtering yang digunakan adalah user-based collaborative filtering, item-based collaborative filtering, dan item-based _collaborative filtering_ yang dikombinasikan dengan fitur konten. Hasil dari pengujian ketiga metode menunjukkan bahwa pada penggunaan _user-based _collaborative filtering_ terjadi kesalahan prediksi rata-rata sebanyak 58,8%; pada _item-based collaborative filtering_ terjadi kesalahan prediksi rata-rata sebanyak 24,9%; sedangkan pada _item-based collaborative filtering_ yang dikombinasikan dengan fitur konten terjadi kesalahan prediksi rata-rata sebanyak 24,4%. Pengkombinasian _collaborative filtering_ dengan fitur konten mengakibatkan hasil rekomendasi yang muncul tidak lagi memiliki karakteristik rekomendasi hasil _collaborative filtering_. [[2]](https://digilib.uns.ac.id/dokumen/detail/26091)
 
 
 # Referensi
