@@ -246,7 +246,7 @@ Tabel. 8 assign dataframe
 
 ## Modeling
 
-## TF-IDF Vectorizer
+### TF-IDF Vectorizer
 
 Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan genre film. Teknik ini digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap kategori genre. Menggunakan fungsi tfidfvectorizer() dari library sklearn. Selain itu saya juga melakukan Inisialisasi TfidfVectorizer dalam hal ini terdapat (1554, 24) shape yang ditemukan berarti nilai 1554 merupakan ukuran data dan 24 merupakan matrik kategori genre. 
 
@@ -268,7 +268,7 @@ Dengan cosine similarity, saya berhasil mengidentifikasi kesamaan antara satu ge
 
 Nah, dengan data kesamaan (similarity) genre yang diperoleh dari kode sebelumnya, saya akan merekomendasikan daftar judul film yang mirip (similar) dengan genre yang sebelumnya pernah melayani pengguna. 
 
-## Mendapatkan Rekomendasi
+### Mendapatkan Rekomendasi
 
 Membuat fungsi moviie_recommendations dengan beberapa parameter sebagai berikut:
 
@@ -277,7 +277,7 @@ Similarity_data : Dataframe mengenai similarity yang telah kita didefinisikan se
 Items : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah ‘movie_name’ dan ‘genre’.
 k : Banyak rekomendasi yang ingin diberikan.
 
-## Model Development dengan Collaborative Filtering
+### Model Development dengan Collaborative Filtering
 
 Sebelumnya saya telah menerapkan teknik content based filtering pada data. Teknik ini merekomendasikan item yang mirip dengan preferensi pengguna di masa lalu. Selanjutnya saya akan menerapkan teknik collaborative filtering untuk membuat sistem rekomendasi. Teknik ini membutuhkan data rating dari user. 
 
@@ -310,7 +310,7 @@ Gambar. 5 output pembagian data
 ![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
 
 
-## Proses Training 
+### Proses Training 
 
 Pada tahap ini, model menghitung skor kecocokan antara pengguna dan resto dengan teknik embedding. Pertama, saya melakukan proses embedding terhadap data genre dan moviie. Selanjutnya, lakukan operasi perkalian dot product antara embedding genre dan movie. Selain itu, saya juga dapat menambahkan bias untuk setiap user dan resto. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi aktivasi sigmoid. 
 
@@ -318,7 +318,7 @@ Di sini, saya membuat class RecommenderNet dengan keras Model class. Kode class 
 
 Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Langkah berikutnya, mulailah proses training. 
 
-# Visualisasi Metrik
+### Visualisasi Metrik
 
 Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
 
@@ -331,7 +331,7 @@ Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup sm
 
 ## Evaluation
 
-## Mendapatkan Rekomendasi film
+### Mendapatkan Rekomendasi film
 
 Untuk mendapatkan rekomendasi judul film, pertama saya ambil sampel user secara acak dan definisikan variabel moviie_not_visited yang merupakan daftar resto yang belum pernah dikunjungi oleh pengguna. Hal ini karena daftar moviie_not_visited inilah yang akan menjadi film yang kita rekomendasikan. 
 
