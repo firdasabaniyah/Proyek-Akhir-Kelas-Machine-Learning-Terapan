@@ -2,9 +2,11 @@
 
 ## Domain Proyek
 
-Domain proyek yang dipilih dalam proyek akhir machine learning terapan ini adalah membuat _movie recommendation system_.
+Domain proyek yang dipilih dalam proyek akhir machine learning terapan ini adalah membuat _movie recommendation system_. 
 
-![Reommendation](https://user-images.githubusercontent.com/111235408/194389995-71d9d455-cf92-4f8d-81ca-c22d3ef1121c.png)
+Gambar 1. Movie
+
+![17___film](https://user-images.githubusercontent.com/111235408/194676810-f8675b7c-6f78-414c-a107-ebb81be328a0.jpg)
 
 
 _Recommendation system_ telah menjadi lazim dalam beberapa tahun terakhir karena menangani masalah kelebihan informasi dengan menyarankan pengguna produk yang paling relevan dari sejumlah besar data. Untuk produk media, _movie recommendation_ kolaboratif _online_ berupaya membantu pengguna mengakses film pilihan mereka dengan menangkap tetangga yang persis sama di antara pengguna atau film dari peringkat umum historis mereka. Namun, karena data yang jarang, pemilihan tetangga menjadi lebih sulit dengan meningkatnya film dan pengguna dengan cepat. 
@@ -13,7 +15,7 @@ Hasil eksperimen pada dataset _recommendation movie_ menunjukkan bahwa pendekata
 
 
 - Film adalah salah satu media hiburan yang populer di masyarakat. Banyaknya judul-judul yang telah rilis membuat masyarakat kesulitan untuk menemukan film mana yang mereka ingin tonton. Karena hal tersebut masalah ini perlu untuk diatasi. Sehingga informasi mengenai film akan memudahkan masyarakat untuk menemukan film yang cocok dengan preferensi _user_, oleh sebab itu _user_ perlu sebuah sistem yang dapat memberikan rekomendasi film.  
-- Sistem rekomendasi adalah sistem yang mampu memberikan rekomendasi item-item yang mungkin disukai oleh pengguna. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. _Collaborative filtering (CF)_ yang digunakan adalah metode _User Based Collaborative Filtering_. Penerapan dilakukan pada website merekomendasikan film-film untuk user menonton.
+- Sistem rekomendasi adalah sistem yang mampu memberikan rekomendasi item-item yang mungkin disukai oleh pengguna. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. _Collaborative filtering (CF)_ yang digunakan adalah metode _User Based Collaborative Filtering_. Penerapan dilakukan pada website merekomendasikan film-film untuk _user_ menonton.
 - _Collaborative filtering_ merupakan sebuah metode dalam membuat prediksi dengan cara menyaring informasi item dari opini pengguna lain. Ide utama dalam sistem rekomendasi _collaborative filtering_ adalah untuk memanfaatkan riwayat opini pengguna aktif lain untuk memprediksi item yang mungkin akan disukai/diminati
 oleh seorang pengguna. Implementasi yang paling sederhana dari pendekatan ini adalah membuat rekomendasi kepada pengguna aktif berdasarkan item yang disukai pengguna lain dengan riwayat selera yang serupa (Ricci, Rokach, & Shapira, 2011). 
 
@@ -30,47 +32,42 @@ oleh seorang pengguna. Implementasi yang paling sederhana dari pendekatan ini ad
 ### Goals
 
 - Dapat dengan cara membuat sistem rekomendasi yang akurat berdasarkan aktivitas pengguna pada masa lalu.
-- Metode yang akan digunakan pada sistem rekomendasi film ini adalah collaborative filtering dan based filtering.
-- Dengan membangun sebuah sistem rekomendasi film yang akurat berdasarkan ratings dan aktivitas pengguna lain pada masa lalu.
+- Metode yang akan digunakan pada sistem rekomendasi film ini adalah _Collaborative Filtering_ dan _Content Based Filtering_
+- Dengan membangun sebuah sistem rekomendasi film yang akurat berdasarkan _ratings_ dan aktivitas pengguna lain pada masa lalu.
  
 
 ### Solution statements
     
 Solusi yang saya buat yaitu dengan menggunakan 2 algoritma Machine Learning sistem rekomendasi,yaitu :
-- Content Based Filtering, adalah algoritma yang merekomendasikan item serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
-Content-based filtering mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
+-  _Content Based Filtering_ adalah algoritma yang merekomendasikan item serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
+ _Content Based Filtering_ mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
 
-- Collaborative Filtering, adalah algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya.
-Metode Collaborative Filtering merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
+- _Collaborative Filtering_, adalah algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya.
+Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
 
-Bahasa sederhananya, algoritma Content Based Filtering digunakan untuk merekemondesikan movie berdasarkan aktivitas pengguna pada masa lalu, sedangkan algoritma Collabarative Filltering digunakan untuk merekomendasikan movie berdasarkan ratings yang paling tinggi.
+Bahasa sederhananya, algoritma _Content Based Filtering_ digunakan untuk merekemondesikan film berdasarkan aktivitas pengguna pada masa lalu, sedangkan algoritma _Collaborative Filtering_ digunakan untuk merekomendasikan film berdasarkan rating yang paling tinggi.
 
-Referensi: [Kelas Machine Learning Terapan](https://www.dicoding.com/academies/319/tutorials/17116)
+Saya menggunakan dataset dari kaggle, untuk dapat menggunakan dataset tersebut saya mengimport file kredensial kaggle dalam bentuk json terlebih dahulu. Maksud dari file kredensial ini adalah untuk mengatur _permission_ dataset yang nantinya akan saya _upload_. Saya juga mengimport _library pandas_ yang dibutuhkan untuk _upload_ dataset Movie Recommendation Data menggunakan kode API. Untuk dapat melihat dataset Movie Recommendation Data yang terdapat pada gambar 2 dataset Movie Recommendation Data.
 
-Saya menggunakan dataset dari kaggle, berikut adalah upload file kredensial kaggle:
+Gambar 2. dataset Movie Recommendation Data.
 
-Gambar 1.1 upload file kredensial kaggle
-
-![kaggle](https://user-images.githubusercontent.com/111235408/194393577-d74adef2-bd11-4081-b4b0-ae3e46674a2f.png)
-
-Gambar 1.2 download dataset
-
-![kaggle 2](https://user-images.githubusercontent.com/111235408/194393797-6eb9cf02-6194-47ae-aa94-d8156e4d75fd.png)
-
+![Reommendation](https://user-images.githubusercontent.com/111235408/194678835-edc34e43-fd9f-45ad-95c2-ed1cdb8baeaa.png)
 
 
 ## Data Understanding
 
-Tabel 1.1 data understanding
+Setelah mendownload dataset tahap selanjutnya adalah melakukan data understanding. Agar lebih memudahkan pembaca, saya membuat tabel yang dapat dilihat di Tabel 1. data understanding
+
+Tabel 1. data understanding
 
 | Sumber | [Kaggle Dataset : Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)|
 | ------------ |---------------| 
 | Lisensi | Unknown |
 | Kategori | Industri Hiburan |
-| Jenis dan Ukuran Berkas | CSV (14 MB) |
+| Jenis dan Ukuran Berkas | ZIP 14 MB |
 
-Dataset yang digunakan pada proyek akhir machine learning ini adalah data Movie Recommendation Data yang didapat dari situs kaggle. Link dataset tersebut, beriku tautan [Kaggle Dataset : Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
+Dataset yang digunakan pada proyek akhir machine learning ini adalah data Movie Recommendation Data yang didapat dari situs kaggle. Link dataset tersebut, berikut tautan Dataset : Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
 
 
 ### Variabel-variabel pada Movie Recommendation dataset adalah sebagai berikut:
@@ -88,9 +85,14 @@ Mari kita mulai eksplorasi!
 
 - variabel Moviie
 
-Gambar 1.3 variabel Moviie
+Tabel 2. variabel Moviie
 
-![variabel movie](https://user-images.githubusercontent.com/111235408/194399077-e83cb39e-3c75-4f88-a5dc-2f4c1bf2167c.png)
+| Column |
+| ------------ |---------------| 
+|  |  |
+|  |   |
+|  |  |
+
 
 - variabel Linkss
 
