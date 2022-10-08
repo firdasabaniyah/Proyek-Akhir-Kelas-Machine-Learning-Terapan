@@ -311,6 +311,25 @@ Di sini, saya membuat _class RecommenderNet_ dengan keras model class. Kode _cla
 
 Selanjutnya, lakukan proses _compile_ terhadap model. Model ini menggunakan _Binary Crossentropy_ untuk menghitung _loss function_, _Adam (Adaptive Moment Estimation)_ sebagai _optimizer_, dan _root mean squared error (RMSE)_ sebagai _metrics evaluation_. Langkah berikutnya, mulailah proses _training_. 
 
+### _Modelling_ dan _Resault_
+
+Berikut hasil Top-N tertera pada Tabel 11. Hasil Top-N
+
+Tabel 11. Hasil Top-N
+
+| movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
+| ------------ |---------------|---------------|---------------|---------------|---------------| 
+| Monster (2003) | 0.462197	 | 0.615050 | 0.000000 | 0.000000 | 0.137931 |
+| Coming Home (1978)	 | 0.366404 | 0.104159 | 0.000000 | 0.000000 | 0.109344 |
+| Thor: Ragnarok (2017) | 0.000000 | 0.000000 | 0.819244 | 0.000000 | 0.000000 |
+| Follow the Fleet (1936) | 0.000000 | 0.000000 | 0.148325 | 0.642388 | 0.234118 |
+| Scott Pilgrim vs. the World (2010) | 0.000000 | 0.000000 | 0.318270 | 0.477664 | 0.174085 |
+| True Lies (1994) | 0.000000 | 0.217058 | 0.368857 | 0.553586 | 0.429617 |
+| Grosse Pointe Blank (1997) | 0.000000 | 0.370178 | 0.169571 | 0.734405 | 0.267654 |
+| Maltese Falcon, The (a.k.a. Dangerous Female) (1931) | 0.000000 | 0.624750 | 0.000000 | 0.000000 | 0.655849 |
+| Dumbo (1941) | 0.229088 | 0.000000 | 0.065124 | 0.000000 | 0.068366 |
+| Jungle2Jungle (a.k.a. Jungle 2 Jungle) (1997) | 0.000000 | 0.000000 | 0.173914 | 0.310132 | 0.000000 |
+
 ## Evaluation
 
 ### Mendapatkan Rekomendasi film
@@ -323,9 +342,29 @@ Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pa
 
 Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi _model.predict()_ dari _library Keras_.
 
-![hasil rekomendasi](https://user-images.githubusercontent.com/111235408/194691635-6657f430-726b-495a-a458-6246902fccad.png)
+Tabel 12. Hasil Rekomendasi
 
-Gambar 7. Hasil Rekomendasi
+| Showing recommendations for users : 448 (Movie with high ratings from user) |  |
+| ------------ |---------------| 
+|  Toy Story (1995) | (Adventure, Animation, Animation, Children, Comedy, Fantasy) |
+| Rating Bull (1980) | (Drama) | 
+| Annie Hal (1977) | (Comedy, Romance) | 
+| Back to The Future (1985) | (Adventure, Comed, Sci-Fi) | 
+
+Tabel 13. Top 10 Movie Recommendation
+
+| Top 10 Movie Recommendation |  | 
+| ------------ |---------------| 
+| Secrets & Lies (1996) | Drama |
+| Shallwe Dance (1973) | (Comedy, Musical, Romance) |
+| Streetcar Named Desire, A (1951) | Drama |
+| Buena Vista Social Club (1999) | (Documentary, Musical) |
+| Guess Who's Coming to Dinner (1967) | Drama |
+| Witness for the Prosecution (1957) | (Drama, Mystery, Thriller) |
+| Adam's Rib (1949) | (Comedy, Romance) |
+| Strada, La (1954) | Drama |
+| Wild Parrots of Telegraph Hill, The (2003) | Documentary |
+| Captain Fantastic (2016) | Drama |
 
 Berhasil memberikan rekomendasi kepada _user_. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk _user_ dengan 448. Dari _output_ tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
 
@@ -346,23 +385,6 @@ Untuk melihat visualisasi proses _training_, saya plot metrik evaluasi dengan _m
 Gambar 10. Visualisasi Metrik
 
 Perhatikanlah pada Gambar. 10 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
-
-Berikut hasil Top-N tertera pada Tabel 11. Hasil Top-N
-
-Tabel 11. Hasil Top-N
-
-| movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
-| ------------ |---------------|---------------|---------------|---------------|---------------| 
-| Monster (2003) | 0.462197	 | 0.615050 | 0.000000 | 0.000000 | 0.137931 |
-| Coming Home (1978)	 | 0.366404 | 0.104159 | 0.000000 | 0.000000 | 0.109344 |
-| Thor: Ragnarok (2017) | 0.000000 | 0.000000 | 0.819244 | 0.000000 | 0.000000 |
-| Follow the Fleet (1936) | 0.000000 | 0.000000 | 0.148325 | 0.642388 | 0.234118 |
-| Scott Pilgrim vs. the World (2010) | 0.000000 | 0.000000 | 0.318270 | 0.477664 | 0.174085 |
-| True Lies (1994) | 0.000000 | 0.217058 | 0.368857 | 0.553586 | 0.429617 |
-| Grosse Pointe Blank (1997) | 0.000000 | 0.370178 | 0.169571 | 0.734405 | 0.267654 |
-| Maltese Falcon, The (a.k.a. Dangerous Female) (1931) | 0.000000 | 0.624750 | 0.000000 | 0.000000 | 0.655849 |
-| Dumbo (1941) | 0.229088 | 0.000000 | 0.065124 | 0.000000 | 0.068366 |
-| Jungle2Jungle (a.k.a. Jungle 2 Jungle) (1997) | 0.000000 | 0.000000 | 0.173914 | 0.310132 | 0.000000 |
 
 Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu _Content based Filtering_ dan _Collaborative Filtering_. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi film yang sesuai dengan preferensi pengguna. 
 
