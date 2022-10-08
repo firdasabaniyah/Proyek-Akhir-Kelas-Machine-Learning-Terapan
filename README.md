@@ -39,7 +39,6 @@ Solusi yang saya buat yaitu dengan menggunakan 2 algoritma _Machine Learning_ si
 -  _Content Based Filtering_ adalah algoritma yang merekomendasikan item serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
  _Content Based Filtering_ mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
-
 - _Collaborative Filtering_, adalah algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya.
 Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
 
@@ -241,6 +240,8 @@ Tabel 8. assign dataframe
 
 ## Modeling
 
+### Model Development dengan Content Based Filtering
+
 ### TF-IDF Vectorizer
 
 Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan _genre film_. Teknik ini digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap kategori _genre+. Menggunakan fungsi tfidfvectorizer() dari _library sklearn_. Selain itu saya juga melakukan Inisialisasi TfidfVectorizer dalam hal ini terdapat (1554, 24) shape yang ditemukan berarti nilai 1554 merupakan ukuran data dan 24 merupakan matrik kategori _genre_. 
@@ -272,28 +273,25 @@ _Similarity_data_ : _Dataframe_ mengenai similarity yang telah kita didefinisika
 _Items_ : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah _movie_name_ dan _genre_.
 k : Banyak rekomendasi yang ingin diberikan.
 
+Hasil rekomendasi terdapat pada tabel 9. Hasil Rekomendasi
+
+Tabel 9. Hasil Rekomendasi 
+
+|  | movie_name | genres |
+| ------------ |---------------|---------------| 
+| 0 | Eyes of Tammy Faye, The (2000) | Documentary |
+| 1 | Why We Fight (2005) | Documentary |
+| 2 | Anne Frank Remembered (1995) | Documentary |
+| 3 | Deliver Us from Evil (2006) | Documentary |
+| 5 | Stone Reader (2002) | Documentary |
+
+
 ### Model Development dengan Collaborative Filtering
 
 Sebelumnya saya telah menerapkan teknik _content based filtering_ pada data. Teknik ini merekomendasikan _item_ yang mirip dengan preferensi pengguna di masa lalu. Selanjutnya saya akan menerapkan teknik _collaborative filtering_ untuk membuat sistem rekomendasi. Teknik ini membutuhkan data rating dari _user_. 
 
 _Goal_ proyek kali ini adalah menghasilkan rekomendasi sejumlah judul film yang sesuai dengan preferensi pengguna berdasarkan rating yang telah diberikan sebelumnya. Dari data rating pengguna, saya akan mengidentifikasi restoran-restoran yang mirip dan belum pernah dikunjungi oleh pengguna untuk direkomendasikan.
 
-- Data Understanding
-
-Pertama, jangan lupa _import_ semua _library_ yang dibutuhkan. _Impor library_ di awal merupakan kebiasaan yang umum dilakukan oleh para praktisi data. Hal ini karena praktisi data kadang menggunakan IDE, tools, maupun lingkungan _cloud_ lainnya. Sehingga, _library_ perlu didefinisikan di awal.
-
-Pada proyek ini, saya akan melakukan _import library_ di awal agar terlihat rapi dan pada sel kode selanjutnya, _library_ yang di _import_ salah satunya _pandas_.Dalam data rating terdapat 100836 _rows_ × 4 _columns_.
-
-- Data _Preparation_
-
-Pada tahap ini, saya perlu melakukan persiapan data untuk menyandikan (_encode_) fitur _user_ dan userId ke dalam indeks integer. Mengubah userID menjadi list tanpa nilai yang sama, melakukan _encoding_ userID dan melakukan proses encoding angka ke ke userID saya lakukan dalam satu kode bersamaan.
-
-Tahap persiapan telah selesai. Berikut adalah hal-hal yang saa kita lakukan pada tahap ini:
-
-- Memahami data rating yang saya miliki.
-- Menyandikan (encode) fitur user dan ‘userId’ ke dalam indeks integer. 
-- Memetakan ‘userID’ dan ‘userID’ ke dataframe yang berkaitan.
-- Mengecek beberapa hal dalam data seperti jumlah user, jumlah film, kemudian mengubah nilai rating menjadi float.
 
  ## Training dan Validasi
 
@@ -312,16 +310,6 @@ Pada tahap ini, model menghitung skor kecocokan antara pengguna dan resto dengan
 Di sini, saya membuat class RecommenderNet dengan keras Model class. Kode class RecommenderNet ini terinspirasi dari tutorial dalam situs Keras dengan beberapa adaptasi sesuai kasus yang sedang saya selesaikan. 
 
 Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Langkah berikutnya, mulailah proses training. 
-
-### Visualisasi Metrik
-
-Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
-
-![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
-
-Gambar 7. Visualisasi Metrik
-
-Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
 
 ## Evaluation
 
@@ -349,6 +337,34 @@ Perhatikanlah, beberapa film rekomendasi menyediakan movie dengan berdas kepada 
 
 Prediksinya cukup sesuai.
 
+### Visualisasi Metrik
+
+Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
+
+![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
+
+Gambar 7. Visualisasi Metrik
+
+Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
+
+Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
+
+| movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
+| ------------ |---------------|---------------|---------------|---------------|---------------| 
+| Monster (2003) | 0.462197	 | 0.615050 | 0.000000 | 0.000000 | 0.137931 |
+| Coming Home (1978)	 | 0.366404 | 0.104159 | 0.000000 | 0.000000 | 0.109344 |
+| Thor: Ragnarok (2017) | 0.000000 | 0.000000 | 0.819244 | 0.000000 | 0.000000 |
+| Follow the Fleet (1936) | 0.000000 | 0.000000 | 0.148325 | 0.642388 | 0.234118 |
+| Scott Pilgrim vs. the World (2010) | 0.000000 | 0.000000 | 0.318270 | 0.477664 | 0.174085 |
+| True Lies (1994) | 0.000000 | 0.217058 | 0.368857 | 0.553586 | 0.429617 |
+| Grosse Pointe Blank (1997) | 0.000000 | 0.370178 | 0.169571 | 0.734405 | 0.267654 |
+| Maltese Falcon, The (a.k.a. Dangerous Female) (1931) | 0.000000 | 0.624750 | 0.000000 | 0.000000 | 0.655849 |
+| Dumbo (1941) | 0.229088 | 0.000000 | 0.065124 | 0.000000 | 0.068366 |
+| Jungle2Jungle (a.k.a. Jungle 2 Jungle) (1997) | 0.000000 | 0.000000 | 0.173914 | 0.310132 | 0.000000 |
+
+
+
+
 Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu Content based Filtering dan Collaborative Filtering. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi movie yang sesuai dengan preferensi pengguna. 
 
 Setiap teknik membutuhkan data yang berbeda dan bekerja dengan cara yang berbeda pula. Misalnya, pada teknik collaborative filtering, saya membutuhkan data rating dari pengguna. Sedangkan, pada content based filtering, data rating tidak diperlukan. 
@@ -362,7 +378,6 @@ Sedangkan _cosine similarity_ adalah salah satu teknik mengukur kesamaan yang be
 Secara umum, fungsi _similarity_ adalah fungsi yang menerima dua buah obyek berupa bilangan riil (0 dan 1) dan mengembalikan nilai kemiripan (similarity) antara kedua obyek tersebut berupa bilangan _riil_. _Cosine similarity_ merupakan salah satu metode pengukuran kemiripan yang populer. Metode ini digunakan untuk menghitung nilai kosinus sudut antara dua vektor dan biasanya digunakan untuk mengukur kemiripan antara dua teks/dokumen. Fungsi cosine similarity antara item A dan item B ditunjukkan.
 
 Selain itu saya juga menggunakan metode _Collaborative Filtering_, dimana _Collaborative Filtering_ merupakan algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
-
 
 - Ketika seseorang memasuki rental VCD seringkali, ia mengalami kebimbangan disebabkan oleh begitu banyaknya pilihan film yang tersedia. Mereka yang sebelumnya tidak memiliki cukup informasi seperti dari membaca review-review film dan mereka yang memang belum memiliki tujuan pasti akan menyewa judul film apa, membutuhkan bentuk rekomendasi dari member-member lainnya. Rekomendasi yang diinginkan adalah yang bersifat personal dan yang dapat sedikit di luar dugaan, kemungkinan film yang sama sekali tidak terpikirkan namun ternyata menarik dan sesuai seleranya. Collaborative filtering memungkinkan munculnya item yang memiliki karakteristik sama sekali berbeda dari item-item yang pernah dipilih sebelumnya namun ternyata menarik bagi user bersangkutan, karena rekomendasi didasarkan pada preferensi user-user lain. Feedback yang ditangkap secara implisit berupa data biner dengan hanya didasarkan pada perilaku seorang member apakah dia menyewa (‘1’) ataukah belum menyewa (‘0’) judul film tertentu. Metode collaborative filtering yang digunakan adalah user-based collaborative filtering, item-based collaborative filtering, dan item-based collaborative filtering yang dikombinasikan dengan fitur konten. Hasil dari pengujian ketiga metode menunjukkan bahwa pada penggunaan user-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 58,8%; pada item-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 24,9%; sedangkan pada item-based collaborative filtering yang dikombinasikan dengan fitur konten terjadi kesalahan prediksi rata-rata sebanyak 24,4%. Pengkombinasian collaborative filtering dengan fitur konten mengakibatkan hasil rekomendasi yang muncul tidak lagi memiliki karakteristik rekomendasi hasil collaborative filtering. [[2]](https://digilib.uns.ac.id/dokumen/detail/26091)
 
