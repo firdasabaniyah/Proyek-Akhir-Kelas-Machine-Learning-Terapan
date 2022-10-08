@@ -225,7 +225,7 @@ Tabel. 7 cek missing value
 | genres | 0 |
 | tag | 0 |
 
-Perhatikanlah, sudah tidak terdapat missing value lagi setealah dilakukan penggabungan-penggabungan terhadap variabel. Selanjutnya, saya hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, saya perlu menghapus data yang duplikat dengan fungsi drop_duplicates().
+Perhatikanlah, sudah tidak terdapat missing value lagi setealah dilakukan penggabungan-penggabungan terhadap variabel. Selanjutnya, saya hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, saya perlu menghapus data yang duplikat dengan fungsi drop_duplicates(). Dan pada dasarnya, method dropna() bisa digunakan untuk menghapus baris atau kolom yang mengandung missing values. Saya hanya perlu menentukan axis-nya, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
 
 - Proses dalam tahap data preparation adalah dengan menghapus Missing Value yang terdapat pada variabel.
 - Alasannya agar model yang dibuat memiliki tingkat prediksi yang bagus. 
@@ -242,9 +242,71 @@ Tabel. 8 assign dataframe
 | 2309 | 3061 | Holiday Inn (1942) | Comedy|Musical |
 | 9019 | 140525 | Secret in Their Eyes (2015) | Crime|Drama|Mystery |
 
-Dan pada dasarnya, method dropna() bisa digunakan untuk menghapus baris atau kolom yang mengandung missing values. Saya hanya perlu menentukan axis-nya, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
+
 
 ## Modeling
+
+## TF-IDF Vectorizer
+
+Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan genre film. Teknik ini digunakan pada sistem rekomendasi untuk menemukan representasi fitur penting dari setiap kategori genre. Menggunakan fungsi tfidfvectorizer() dari library sklearn. Selain itu saya juga melakukan Inisialisasi TfidfVectorizer dalam hal ini terdapat (1554, 24) shape yang ditemukan berarti nilai 1554 merupakan ukuran data dan 24 merupakan matrik kategori genre. 
+
+Perhitungan idf pada data genre dengan cara melakukan fit lalu ditransformasikan ke bentuk matrix dan melihat ukuran matrix tfidf dengan menggunakan fungsi todense(). Selanjutnya, saya lihat matriks tf-idf untuk beberapa genre. Dapat dilihat pada Gambar. 3 matrix tfidf dibawah.
+
+Gambar. 3 matrix tfidf
+
+![matrix](https://user-images.githubusercontent.com/111235408/194685122-60f0aa0d-06ea-4b55-9e86-59dfe0371168.png)
+
+Selanjutnya, saya akan menghitung derajat kesamaan (similarity degree) antar genre dengan teknik cosine similarity. Di sini, saya menggunakan fungsi cosine_similarity dari library sklearn. Berikut Gambar. 4 Cosine Simmilarity.
+
+Gambar. 4 Cosine Simmilarity
+
+![cosine](https://user-images.githubusercontent.com/111235408/194685484-bc41f47b-f601-4435-92e6-94f322ba9e7b.png)
+
+Pada tahapan ini, saya menghitung cosine similarity dataframe tfidf_matrix yang saya peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi cosine similarity dari library sklearn, saya telah berhasil menghitung kesamaan (similarity) antar genre. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk array. 
+
+Dengan cosine similarity, saya berhasil mengidentifikasi kesamaan antara satu genre film dengan genre film lainnya. Shape (1554, 1554) merupakan ukuran matriks similarity dari data yang saya miliki. Berdasarkan data yang ada, matriks di atas sebenarnya berukuran 1554 genre x 1554 genre (masing-masing dalam sumbu X dan Y). Artinya, saya mengidentifikasi tingkat kesamaan pada 1554 genre film.  
+
+Nah, dengan data kesamaan (similarity) genre yang diperoleh dari kode sebelumnya, saya akan merekomendasikan daftar judul film yang mirip (similar) dengan genre yang sebelumnya pernah melayani pengguna. 
+
+## Mendapatkan Rekomendasi
+
+Membuat fungsi moviie_recommendations dengan beberapa parameter sebagai berikut:
+
+Nama_moviie : Nama judul dari moviie tersebut (index kemiripan dataframe).
+Similarity_data : Dataframe mengenai similarity yang telah kita didefinisikan sebelumnya
+Items : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah ‘movie_name’ dan ‘genre’.
+k : Banyak rekomendasi yang ingin diberikan.
+
+## Model Development dengan Collaborative Filtering
+
+Sebelumnya saya telah menerapkan teknik content based filtering pada data. Teknik ini merekomendasikan item yang mirip dengan preferensi pengguna di masa lalu. Selanjutnya saya akan menerapkan teknik collaborative filtering untuk membuat sistem rekomendasi. Teknik ini membutuhkan data rating dari user. 
+
+Goal proyek kali ini adalah menghasilkan rekomendasi sejumlah judul film yang sesuai dengan preferensi pengguna berdasarkan rating yang telah diberikan sebelumnya. Dari data rating pengguna, saya akan mengidentifikasi restoran-restoran yang mirip dan belum pernah dikunjungi oleh pengguna untuk direkomendasikan.
+
+- Data Understanding
+
+Pertama, jangan lupa import semua library yang dibutuhkan. Impor library di awal merupakan kebiasaan yang umum dilakukan oleh para praktisi data. Hal ini karena praktisi data kadang menggunakan IDE, tools, maupun lingkungan cloud lainnya. Sehingga, library perlu didefinisikan di awal.
+
+Pada proyek ini, saya akan melakukan impor library di awal agar terlihat rapi dan pada sel kode selanjutnya, library yang diimport salah satunya pandas.Dalam data rating terdapat 100836 rows × 4 columns.
+
+- Data Preparation
+
+Pada tahap ini, saya perlu melakukan persiapan data untuk menyandikan (encode) fitur ‘user’ dan ‘userId’ ke dalam indeks integer. Mengubah userID menjadi list tanpa nilai yang sama, melakukan encoding userID dan melakukan proses encoding angka ke ke userID saya lakukan dalam satu kode bersamaan.
+
+Tahap persiapan telah selesai. Berikut adalah hal-hal yang saa kita lakukan pada tahap ini:
+
+- Memahami data rating yang saya miliki.
+- Menyandikan (encode) fitur ‘user’ dan ‘userId’ ke dalam indeks integer. 
+- Memetakan ‘userID’ dan ‘userID’ ke dataframe yang berkaitan.
+- Mengecek beberapa hal dalam data seperti jumlah user, jumlah film, kemudian mengubah nilai rating menjadi float.
+
+Tahap persiapan ini penting dilakukan agar data siap digunakan untuk pemodelan. Namun sebelumnya, saya perlu membagi data untuk training dan validasi terlebih dahulu.
+Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perlu memetakan (mapping) data genre dan movie menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. 
+
+Gambar. 5 output pembagian data
+
+![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
+
 
 Tahapan yang dilakukan pada fungsi tersebut ialah sebagai berikut.
 
