@@ -4,15 +4,13 @@
 
 Domain proyek yang dipilih dalam proyek akhir machine learning terapan ini adalah membuat _movie recommendation system_. 
 
-Gambar 1. Movie
-
 ![17___film](https://user-images.githubusercontent.com/111235408/194676810-f8675b7c-6f78-414c-a107-ebb81be328a0.jpg)
 
+Gambar 1. Movie
 
 _Recommendation system_ telah menjadi lazim dalam beberapa tahun terakhir karena menangani masalah kelebihan informasi dengan menyarankan pengguna produk yang paling relevan dari sejumlah besar data. Untuk produk media, _movie recommendation_ kolaboratif _online_ berupaya membantu pengguna mengakses film pilihan mereka dengan menangkap tetangga yang persis sama di antara pengguna atau film dari peringkat umum historis mereka. Namun, karena data yang jarang, pemilihan tetangga menjadi lebih sulit dengan meningkatnya film dan pengguna dengan cepat. 
  _Movie recommendation system_ merupakan sistem yang merekomendasikan film kepada penonton atau pengguna lainnya, rekomendasi ini contohnya diterapkan pada situs seperti netflix, iqiyi, dan wetv. Dalam proyek ini, diusulkan sistem rekomendasi film berbasis model _collaborative filtering_ dan _based filtering_.  Sistem rekomendasi yang saya buat ini didasarkan pada peferensi kesukaan pengguna dimasa lalu, serta rating dari film tersebut.
 Hasil eksperimen pada dataset _recommendation movie_ menunjukkan bahwa pendekatan yang diusulkan dapat memberikan kinerja tinggi dalam hal akurasi, dan menghasilkan rekomendasi film yang lebih andal dan personal jika dibandingkan dengan metode yang ada.
-
 
 - Film adalah salah satu media hiburan yang populer di masyarakat. Banyaknya judul-judul yang telah rilis membuat masyarakat kesulitan untuk menemukan film mana yang mereka ingin tonton. Karena hal tersebut masalah ini perlu untuk diatasi. Sehingga informasi mengenai film akan memudahkan masyarakat untuk menemukan film yang cocok dengan preferensi _user_, oleh sebab itu _user_ perlu sebuah sistem yang dapat memberikan rekomendasi film.  
 - Sistem rekomendasi adalah sistem yang mampu memberikan rekomendasi item-item yang mungkin disukai oleh pengguna. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. _Collaborative filtering (CF)_ yang digunakan adalah metode _User Based Collaborative Filtering_. Penerapan dilakukan pada website merekomendasikan film-film untuk _user_ menonton.
@@ -37,7 +35,7 @@ oleh seorang pengguna. Implementasi yang paling sederhana dari pendekatan ini ad
 
 ### Solution statements
     
-Solusi yang saya buat yaitu dengan menggunakan 2 algoritma Machine Learning sistem rekomendasi,yaitu :
+Solusi yang saya buat yaitu dengan menggunakan 2 algoritma _Machine Learning_ sistem rekomendasi,yaitu :
 -  _Content Based Filtering_ adalah algoritma yang merekomendasikan item serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit.
  _Content Based Filtering_ mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Algoritma ini bekerja dengan menyarankan item serupa yang pernah disukai di masa lalu atau sedang dilihat di masa kini kepada pengguna. Semakin banyak informasi yang diberikan pengguna, semakin baik akurasi sistem rekomendasi.
 
@@ -45,14 +43,13 @@ Solusi yang saya buat yaitu dengan menggunakan 2 algoritma Machine Learning sist
 - _Collaborative Filtering_, adalah algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya.
 Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
 
-Bahasa sederhananya, algoritma _Content Based Filtering_ digunakan untuk merekemondesikan film berdasarkan aktivitas pengguna pada masa lalu, sedangkan algoritma _Collaborative Filtering_ digunakan untuk merekomendasikan film berdasarkan rating yang paling tinggi.
+Bahasa sederhananya, algoritma _Content Based Filtering_ digunakan untuk merekomendasikan film berdasarkan aktivitas pengguna pada masa lalu, sedangkan algoritma _Collaborative Filtering_ digunakan untuk merekomendasikan film berdasarkan rating yang paling tinggi.
 
 Saya menggunakan dataset dari kaggle, untuk dapat menggunakan dataset tersebut saya mengimport file kredensial kaggle dalam bentuk json terlebih dahulu. Maksud dari file kredensial ini adalah untuk mengatur _permission_ dataset yang nantinya akan saya _upload_. Saya juga mengimport _library pandas_ yang dibutuhkan untuk _upload_ dataset Movie Recommendation Data menggunakan kode API. Untuk dapat melihat dataset Movie Recommendation Data yang terdapat pada gambar 2 dataset Movie Recommendation Data.
 
-Gambar 2. dataset Movie Recommendation Data
-
 ![Reommendation](https://user-images.githubusercontent.com/111235408/194678835-edc34e43-fd9f-45ad-95c2-ed1cdb8baeaa.png)
 
+Gambar 2. Dataset Movie Recommendation Data
 
 ## Data Understanding
 
@@ -66,7 +63,7 @@ Tabel 1. data understanding
 | Kategori | Industri Hiburan |
 | Jenis dan Ukuran Berkas | ZIP 14 MB |
 
-Dataset yang digunakan pada proyek akhir machine learning ini adalah data Movie Recommendation Data yang didapat dari situs kaggle. Link dataset tersebut, berikut tautan Dataset : Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
+Dataset yang digunakan pada proyek akhir _machine learning_ ini adalah dataset Movie Recommendation Data yang didapat dari situs kaggle. Link dataset tersebut, berikut tautan Dataset : [Movie Recommendation Data](https://www.kaggle.com/datasets/rohan4050/movie-recommendation-data)
 
 
 ### Variabel-variabel pada Movie Recommendation dataset adalah sebagai berikut:
@@ -128,7 +125,7 @@ Dari tabel 4 Variable Ratingg yang tertera diatas terdapat 4 kolom yang ada di v
 
 Untuk melihat rating describe dan memudahkan dalam melihatnya saya visualisasikan menggunakan Table 5 visualisasi rating describe dibawah.
 
-Table. 5 visualisasi rating describe
+Table 5. Visualisasi Rating _Describe_
 
 |  | userId | movieId | rating | timestamp |
 | ------------ |---------------|---------------|---------------|---------------|
@@ -144,9 +141,9 @@ Table. 5 visualisasi rating describe
 
 Kemudian untuk melihat visualisasi dari banyaknya genre film atau menampilkan rata-rata genre yg paling banyak muncul pada dataset.
 
-Gambar 3 visualisasi genre
-
 ![visualisasi data](https://user-images.githubusercontent.com/111235408/194400480-e955951c-50e6-473a-b31f-9aaa5f230296.png)
+
+Gambar 3. Visualisasi Genre
 
 Dalam tampilan Gambar 3 visualisasi genre terlihat bahwa film dengan genre commedi dan drama paling banyak diminati oleh pengguna.
 
@@ -177,7 +174,7 @@ Menggabungkan file linkk, moviie, ratingg, dan tagg ke dalam dataframe moviie_in
 
 Setelah itu, mengecek missing value menggunakan fungsi isnull terhadap variabel moviie. Berikut ini Tabel. 6 Missing Value memudahkan dalam memahami variabel mana saja yang terdapat missing value :
 
-Tabel. 6 Missing Value
+Tabel 6. Missing Value
 
 |  |  | 
 | ------------ |---------------|
@@ -212,7 +209,7 @@ Terdapat 100836 rows × 4 columns dalam penggabungan Data dengan Fitur Nama Movi
 Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada missing value atau tidak.  Dengan menjalankan kode berikut.
 all_moviie.isnull().sum(). Dan ternyata hasilnya dalam tabel berikut ini :
 
-Tabel. 7 cek missing value
+Tabel 7. cek missing value
 
 | variabel | Banyaknya data |
 | ------------ |---------------| 
@@ -231,7 +228,7 @@ Perhatikanlah, sudah tidak terdapat missing value lagi setealah dilakukan pengga
 
 Mengembangkan sistem rekomendasi dengan pendekatan content based filtering. Tapi sebelumnya, mari cek lagi data yang kita miliki dan assign dataframe dari tahap sebelumnya ke dalam variabel data, sebagai berikut:
 
-Tabel. 8 assign dataframe 
+Tabel 8. assign dataframe 
 
 |  | movieId | title | genres |
 | ------------ |---------------|---------------|---------------|  
@@ -251,15 +248,15 @@ Pada tahap ini, saya akan membangun sistem rekomendasi sederhana berdasarkan gen
 
 Perhitungan idf pada data genre dengan cara melakukan fit lalu ditransformasikan ke bentuk matrix dan melihat ukuran matrix tfidf dengan menggunakan fungsi todense(). Selanjutnya, saya lihat matriks tf-idf untuk beberapa genre. Dapat dilihat pada Gambar. 3 matrix tfidf dibawah.
 
-Gambar. 3 matrix tfidf
-
 ![matrix](https://user-images.githubusercontent.com/111235408/194685122-60f0aa0d-06ea-4b55-9e86-59dfe0371168.png)
+
+Gambar 4. Matrix Tfidf
 
 Selanjutnya, saya akan menghitung derajat kesamaan (similarity degree) antar genre dengan teknik cosine similarity. Di sini, saya menggunakan fungsi cosine_similarity dari library sklearn. Berikut Gambar. 4 Cosine Simmilarity.
 
-Gambar. 4 Cosine Simmilarity
-
 ![cosine](https://user-images.githubusercontent.com/111235408/194685484-bc41f47b-f601-4435-92e6-94f322ba9e7b.png)
+
+Gambar 5. Cosine Simmilarity
 
 Pada tahapan ini, saya menghitung cosine similarity dataframe tfidf_matrix yang saya peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi cosine similarity dari library sklearn, saya telah berhasil menghitung kesamaan (similarity) antar genre. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk array. 
 
@@ -304,9 +301,9 @@ Tahap persiapan telah selesai. Berikut adalah hal-hal yang saa kita lakukan pada
 Tahap persiapan ini penting dilakukan agar data siap digunakan untuk pemodelan. Namun sebelumnya, saya perlu membagi data untuk training dan validasi terlebih dahulu.
 Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perlu memetakan (mapping) data genre dan movie menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. 
 
-Gambar. 5 output pembagian data
-
 ![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
+
+Gambar 6. Output Pembagian Data
 
 
 ### Proses Training 
@@ -321,10 +318,9 @@ Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary
 
 Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
 
-Gambar. 6 visualisasi Metrik
-
 ![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
 
+Gambar 7. Visualisasi Metrik
 
 Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
 
@@ -340,9 +336,9 @@ Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pa
 
 Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi model.predict() dari library Keras.
 
-Gambar. 7 Hasil Rekomendasi
-
 ![hasil rekomendasi](https://user-images.githubusercontent.com/111235408/194691635-6657f430-726b-495a-a458-6246902fccad.png)
+
+Gambar 8. Hasil Rekomendasi
 
 Berhasil memberikan rekomendasi kepada user. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk user dengan 448. Dari output tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
 
