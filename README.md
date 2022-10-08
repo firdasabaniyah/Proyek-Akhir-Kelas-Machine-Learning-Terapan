@@ -325,7 +325,7 @@ Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi _model.predict()_
 
 ![hasil rekomendasi](https://user-images.githubusercontent.com/111235408/194691635-6657f430-726b-495a-a458-6246902fccad.png)
 
-Gambar 8. Hasil Rekomendasi
+Gambar 7. Hasil Rekomendasi
 
 Berhasil memberikan rekomendasi kepada _user_. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk _user_ dengan 448. Dari _output_ tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
 
@@ -343,11 +343,13 @@ Untuk melihat visualisasi proses _training_, saya plot metrik evaluasi dengan _m
 
 ![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
 
-Gambar 7. Visualisasi Metrik
+Gambar 10. Visualisasi Metrik
 
-Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
+Perhatikanlah pada Gambar. 10 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
 
-Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
+Berikut hasil Top-N tertera pada Tabel 11. Hasil Top-N
+
+Tabel 11. Hasil Top-N
 
 | movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
 | ------------ |---------------|---------------|---------------|---------------|---------------| 
@@ -361,9 +363,6 @@ Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
 | Maltese Falcon, The (a.k.a. Dangerous Female) (1931) | 0.000000 | 0.624750 | 0.000000 | 0.000000 | 0.655849 |
 | Dumbo (1941) | 0.229088 | 0.000000 | 0.065124 | 0.000000 | 0.068366 |
 | Jungle2Jungle (a.k.a. Jungle 2 Jungle) (1997) | 0.000000 | 0.000000 | 0.173914 | 0.310132 | 0.000000 |
-
-
-
 
 Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu _Content based Filtering_ dan _Collaborative Filtering_. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi film yang sesuai dengan preferensi pengguna. 
 
