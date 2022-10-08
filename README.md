@@ -300,6 +300,8 @@ Tahap persiapan telah selesai. Berikut adalah hal-hal yang saa kita lakukan pada
 - Memetakan ‘userID’ dan ‘userID’ ke dataframe yang berkaitan.
 - Mengecek beberapa hal dalam data seperti jumlah user, jumlah film, kemudian mengubah nilai rating menjadi float.
 
+ ## Training dan Validasi
+
 Tahap persiapan ini penting dilakukan agar data siap digunakan untuk pemodelan. Namun sebelumnya, saya perlu membagi data untuk training dan validasi terlebih dahulu.
 Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perlu memetakan (mapping) data genre dan movie menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. 
 
@@ -308,65 +310,69 @@ Gambar. 5 output pembagian data
 ![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
 
 
-Tahapan yang dilakukan pada fungsi tersebut ialah sebagai berikut.
+## Proses Training 
 
-- Mengambil indeks dari judul film yang telah didefinisikan sebelumnnya.
-- Mengambil skor kemiripan dengan semua film.
-- Mengurutkan film berdasarkan skor kemiripan.
-- Mengambil 19 judul berdasarkan kemiripan dari 1-20 karena urutan 0 memberikan indeks yang sama dengan judul film yang diinput.
-- Mengambil judul film dari skor kemiripan.
-- Mengembalikan 19 rekomendasi judul film dari kemiripan skor yang telah diurutkan dan menampilkan genre dari 19 rekomendasi film tersebut.
+Pada tahap ini, model menghitung skor kecocokan antara pengguna dan resto dengan teknik embedding. Pertama, saya melakukan proses embedding terhadap data genre dan moviie. Selanjutnya, lakukan operasi perkalian dot product antara embedding genre dan movie. Selain itu, saya juga dapat menambahkan bias untuk setiap user dan resto. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi aktivasi sigmoid. 
 
-Berikut top-4 recommemdation berdasarkan genre dari judul film "Wonderful, Horrible Life of Leni Riefenstahl, The (Macht der Bilder: Leni Riefenstahl, Die) (1993)"
+Di sini, saya membuat class RecommenderNet dengan keras Model class. Kode class RecommenderNet ini terinspirasi dari tutorial dalam situs Keras dengan beberapa adaptasi sesuai kasus yang sedang saya selesaikan. 
 
-Tabel 1.3 top-4 recommemdation film
+Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan root mean squared error (RMSE) sebagai metrics evaluation. Langkah berikutnya, mulailah proses training. 
 
-| Judul | genres |
-| ------------ |---------------| 
-| Wonderful, Horrible Life of Leni Riefenstahl, The (Macht der Bilder: Leni Riefenstahl, Die) (1993) | Documentary |
-|  ![rekomendasi](https://user-images.githubusercontent.com/111235408/194407721-36b406b9-d912-4add-963d-a13b6d152050.png) |   |
-| Dengan hasil yang diberikan di atas berdasarkan judul film "Wonderful, Horrible Life of Leni Riefenstahl, The (Macht der Bilder: Leni Riefenstahl, Die) (1993)" dengan genre Documentary maka didapatkan 4 rekomendasi judul film dengan genre yang serupa ataupun mirip. |  |
+# Visualisasi Metrik
 
-Setelah dilakukan pra-pemrosesan pada dataset, langkah selanjutnya adalah modeling terhadap data. Pada tahap ini Model machine learning yang digunakan pada sistem rekomendasi ini adalah model content-based filtering dengan simlarty measure yang digunakan adalah Cosine Similarity.
+Untuk melihat visualisasi proses training, saya plot metrik evaluasi dengan matplotlib. 
 
-Model content-based filtering ini bekerja dengan mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Metode ini bekerja dengan menyarankan item serupa yang pernah disukai sebelumnya atau sedang dilihat sekarang kepada pengguna berdasrakan kategori tertentu dari item yang dinilai oleh pengguna dengan menggunakan similarity tertentu.
+Gambar. 6 visualisasi Metrik
 
-Sedangkan cosine similarity adalah salah satu teknik mengukur kesamaan yang bekerja dengan mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama dengan menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus, semakin besar nilai cosine similarity. cara kerja dari fungsi cosine similiraty yaitu dengan melakukan perhitungan yang sering digunakan untuk menghitung kemiripan diantara item-item. 
+![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
 
-Secara umum, fungsi similarity adalah fungsi yang menerima dua buah obyek berupa bilangan riil (0 dan 1) dan mengembalikan nilai kemiripan (similarity) antara kedua obyek tersebut berupa bilangan riil. Cosine similarity merupakan salah satu metode pengukuran kemiripan yang populer. Metode ini digunakan untuk menghitung nilai kosinus sudut antara dua vektor dan biasanya digunakan untuk mengukur kemiripan antara dua teks/dokumen. Fungsi cosine similarity antara item A dan item B ditunjukkan.
 
-Selain itu saya juga menggunakan metode Collaborative Filtering, dimana Collaborative Filtering merupakan algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya. Metode Collaborative Filtering merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
+Perhatikanlah pada Gambar. 6 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
+
+## Evaluation
+
+## Mendapatkan Rekomendasi film
+
+Untuk mendapatkan rekomendasi judul film, pertama saya ambil sampel user secara acak dan definisikan variabel moviie_not_visited yang merupakan daftar resto yang belum pernah dikunjungi oleh pengguna. Hal ini karena daftar moviie_not_visited inilah yang akan menjadi film yang kita rekomendasikan. 
+
+Sebelumnya, pengguna telah memberi rating pada beberapa film yang telah mereka kunjungi. saya menggunakan rating ini untuk membuat rekomendasi film yang mungkin cocok untuk pengguna. Nah, film yang akan direkomendasikan tentulah film yang belum pernah ditonton oleh pengguna. 
+
+Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pada variabel moviie_visited_by_user.
+
+Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi model.predict() dari library Keras.
+
+Gambar. 7 Hasil Rekomendasi
+
+![hasil rekomendasi](https://user-images.githubusercontent.com/111235408/194691635-6657f430-726b-495a-a458-6246902fccad.png)
+
+Berhasil memberikan rekomendasi kepada user. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk user dengan 448. Dari output tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
+
+Perhatikanlah, beberapa film rekomendasi menyediakan movie dengan berdas kepada kategori genre  yang sesuai dengan rating user. Saya memperoleh 4 _movie with high ratings from user_ diantaranya :
+- Toy Story (1995) : Adventure|Animation|Children|Comedy|Fantasy
+- Raging Bull (1980) : Drama
+- Annie Hall (1977) : Comedy|Romance
+- Back to the Future (1985) : Adventure|Comedy|Sci-Fi masakan (cuisine). 
+
+Prediksinya cukup sesuai.
+
+Sampai di tahap ini, saya telah berhasil membuat sistem rekomendasi dengan dua teknik, yaitu Content based Filtering dan Collaborative Filtering. Sistem rekomendasi yang saya buat telah berhasil memberikan sejumlah rekomendasi movie yang sesuai dengan preferensi pengguna. 
+
+Setiap teknik membutuhkan data yang berbeda dan bekerja dengan cara yang berbeda pula. Misalnya, pada teknik collaborative filtering, saya membutuhkan data rating dari pengguna. Sedangkan, pada content based filtering, data rating tidak diperlukan. 
+
+Berikut kelebihan serta kekurangan dari ke-2 model :
+
+Model _content-based filtering_ ini bekerja dengan mempelajari profil minat pengguna baru berdasarkan data dari objek yang telah dinilai pengguna. Metode ini bekerja dengan menyarankan item serupa yang pernah disukai sebelumnya atau sedang dilihat sekarang kepada pengguna berdasrakan kategori tertentu dari item yang dinilai oleh pengguna dengan menggunakan _similarity_ tertentu.
+
+Sedangkan _cosine similarity_ adalah salah satu teknik mengukur kesamaan yang bekerja dengan mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor tersebut menunjuk ke arah yang sama dengan menghitung sudut _cosinus_ antara dua vektor. Semakin kecil sudut _cosinus_, semakin besar nilai _cosine similarity_. Cara kerja dari fungsi _cosine similiraty_ yaitu dengan melakukan perhitungan yang sering digunakan untuk menghitung kemiripan diantara item-item. 
+
+Secara umum, fungsi _similarity_ adalah fungsi yang menerima dua buah obyek berupa bilangan riil (0 dan 1) dan mengembalikan nilai kemiripan (similarity) antara kedua obyek tersebut berupa bilangan _riil_. _Cosine similarity_ merupakan salah satu metode pengukuran kemiripan yang populer. Metode ini digunakan untuk menghitung nilai kosinus sudut antara dua vektor dan biasanya digunakan untuk mengukur kemiripan antara dua teks/dokumen. Fungsi cosine similarity antara item A dan item B ditunjukkan.
+
+Selain itu saya juga menggunakan metode _Collaborative Filtering_, dimana _Collaborative Filtering_ merupakan algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya. Metode _Collaborative Filtering_ merupakan salah satu metode pada sistem rekomendasi. Metode ini memanfaatkan penilaian pengguna lain berupa rating atau umpan balik lain untuk memprediksi item yang mungkin diminati. 
 
 
 
 - Ketika seseorang memasuki rental VCD seringkali, ia mengalami kebimbangan disebabkan oleh begitu banyaknya pilihan film yang tersedia. Mereka yang sebelumnya tidak memiliki cukup informasi seperti dari membaca review-review film dan mereka yang memang belum memiliki tujuan pasti akan menyewa judul film apa, membutuhkan bentuk rekomendasi dari member-member lainnya. Rekomendasi yang diinginkan adalah yang bersifat personal dan yang dapat sedikit di luar dugaan, kemungkinan film yang sama sekali tidak terpikirkan namun ternyata menarik dan sesuai seleranya. Collaborative filtering memungkinkan munculnya item yang memiliki karakteristik sama sekali berbeda dari item-item yang pernah dipilih sebelumnya namun ternyata menarik bagi user bersangkutan, karena rekomendasi didasarkan pada preferensi user-user lain. Feedback yang ditangkap secara implisit berupa data biner dengan hanya didasarkan pada perilaku seorang member apakah dia menyewa (‘1’) ataukah belum menyewa (‘0’) judul film tertentu. Metode collaborative filtering yang digunakan adalah user-based collaborative filtering, item-based collaborative filtering, dan item-based collaborative filtering yang dikombinasikan dengan fitur konten. Hasil dari pengujian ketiga metode menunjukkan bahwa pada penggunaan user-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 58,8%; pada item-based collaborative filtering terjadi kesalahan prediksi rata-rata sebanyak 24,9%; sedangkan pada item-based collaborative filtering yang dikombinasikan dengan fitur konten terjadi kesalahan prediksi rata-rata sebanyak 24,4%. Pengkombinasian collaborative filtering dengan fitur konten mengakibatkan hasil rekomendasi yang muncul tidak lagi memiliki karakteristik rekomendasi hasil collaborative filtering.
 
-Referensi : [Penerapan Metode Collaborative Filtering Menggunakan Rating Implisit pada Sistem Perekomendasi Pemilihan Film Di Rental VCD](https://digilib.uns.ac.id/dokumen/detail/26091)
-
-
-- Kedua model menurut saya sudah bekerja dengan bagus, dan menurut saya model terbaik yaitu Collaborative filtering. Karena merekomendasikan film berdasarkan genre yang sama dan sesuai.
-
-
-## Evaluation
-
-Pada proyek ini, Metric yang digunakan pada sistem rekomendasi judul film berdasarkan genre adalah accuracy precision. Precision adalah metrik yang membandingkan rasio prediksi benar atau positif dengan keseluruhan hasil yang diprediksi positif dengan rumus :
-
-Tabel 1.4 Rumus Metric accuracy precision
-
-| Rumus | 
-| ------------ | 
-| Precission = TP/(TP + FP)  |
-| keterangan:
-TP = True Positif (prediksi positif dan hal tersebut benar)
-FP = False Positif (prediksi positif dan hal tersebut salah) |
-
-Alasan accuracy Precision dipilih adalah karena metrik ini dapat membandingkan rasio prediksi benar atau positif dengan keseluruhan hasil yang diprediksi positif. Dalam hal ini adalah rasio item yang direkomendasikan memiliki genre yang mirip atau serupa dibandingkan dengan genre dari judul film yang diinput.
-
-Berikut adalah hasil evaluasi :
-
-Gambar 1.7 Hasil evaluasi
-
-![final](https://user-images.githubusercontent.com/111235408/194409935-95dac870-a85a-45f8-b376-a8645832b1f2.png)
 
 # Referensi
 - [Sistem Rekomendasi Film Menggunakan Metode User Based Collaborative Filtering](https://openlibrarypublications.telkomuniversity.ac.id/index.php/engineering/article/view/16513) 
