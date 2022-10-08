@@ -50,7 +50,7 @@ Bahasa sederhananya, algoritma _Content Based Filtering_ digunakan untuk merekem
 
 Saya menggunakan dataset dari kaggle, untuk dapat menggunakan dataset tersebut saya mengimport file kredensial kaggle dalam bentuk json terlebih dahulu. Maksud dari file kredensial ini adalah untuk mengatur _permission_ dataset yang nantinya akan saya _upload_. Saya juga mengimport _library pandas_ yang dibutuhkan untuk _upload_ dataset Movie Recommendation Data menggunakan kode API. Untuk dapat melihat dataset Movie Recommendation Data yang terdapat pada gambar 2 dataset Movie Recommendation Data.
 
-Gambar 2. dataset Movie Recommendation Data.
+Gambar 2. dataset Movie Recommendation Data
 
 ![Reommendation](https://user-images.githubusercontent.com/111235408/194678835-edc34e43-fd9f-45ad-95c2-ed1cdb8baeaa.png)
 
@@ -77,60 +77,143 @@ Dataset yang digunakan pada proyek akhir machine learning ini adalah data Movie 
 - Ratingg :list penilaian yang diberikan penonton terhadap movie.
 - Tagg : list kata kunci dari movie.
 
+Berikut beberapa tahapan Data Understanding diantaranya sebagai berikut:
+
+- Meload Dataset ke dalam sebuah Dataframe menggunakan pandas.
+- df.info() digunakan untuk mengecek tipe kolom pada dataset.
+- df.isna().sum() digunakan untuk mengecek apakah ada kolom yg kosong, pada dataset ini nilai kosong tidak ditemukan.
+- df.describe() digunakan untuk mendapatkan info mengenai dataset terhadap nilai rata-rata, median, banyaknya data, nilai Q1 hingga Q3 dan lain-lain.
+- len(nama_variable.unique())menghitung panjang data unique dari variable tertentu.
 
 Tahap eksplorasi penting untuk memahami variabel-variabel pada data serta korelasi antar variabel. Pemahaman terhadap variabel pada data dan korelasinya akan membantu saya dalam menentukan pendekatan atau algoritma yang cocok untuk data saya. Saya akan melakukan eksplorasi data terhadap variabel Linkss, variabel Moviie, variabel Ratingg dan variabel Tagg.
 Variabel Moviie dan ratingg akan digunakan pada model rekomendasi saya. Sedangkan, variabel Linkss dan Tagg hanya untuk melihat bagaimana linkss akses dan tagg  yang digunakan oleh pengguna. 
 
 Mari kita mulai eksplorasi!
 
-- variabel Moviie
+- Variabel Moviie
 
-Tabel 2. variabel Moviie
+Tabel 2. Variabel Moviie
 
-| Column |
-| ------------ |---------------| 
-|  |  |
-|  |   |
-|  |  |
+| Column | Non-Null | Count | Dtype |
+| ------------ |---------------|---------------|---------------|
+| movieId | 9742 | non-null | int64 |
+| title |  9742 | non-null | object |
+| genres | 9742 | non-null | object |
 
+Dari tabel 2 Variable Moviie yang tertera diatas terdapat 3 kolom yang ada di variabel moviie yaitu movieId, title, dan genres. MovieId memiliki tipe data int64 sedangkan title dan genres memiliki tipe data object.
 
 - variabel Linkss
 
-Gambar 1.4 variabel Linkss
+Tabel 3. variabel Linkss
 
-![variabel linkk](https://user-images.githubusercontent.com/111235408/194399459-cc81e8b6-af72-44f0-a6b7-446f3ce09865.png)
+| Column | Non-Null | Count | Dtype |
+| ------------ |---------------|---------------|---------------|
+| movieId | 9742 | non-null | int64 |
+| imdbId |  9742 | non-null | int64 |
+| tmdbId | 9742 | non-null | float64 |
+
+Dari tabel 3 Variable Linkss yang tertera diatas terdapat 3 kolom yang ada di variabel Linkss yaitu movieId, imdbId, dan tmdbId. MovieId dan imdbId memiliki tipe data int64 sedangkan tmdbId memiliki tipe data float64.
 
 - Variabel Ratingg
 
-Gambar 1.5 Variabel Ratingg
+Tabel 4. Variabel Ratingg
 
-![variabel rating](https://user-images.githubusercontent.com/111235408/194399937-0c3a023d-f637-4c53-aec5-06f49a1797f5.png)
+| Column | Non-Null | Count | Dtype |
+| ------------ |---------------|---------------|---------------|
+| userId | 100836 | non-null | int64 |
+| movieId | 100836 | non-null | int64 |
+| rating | 100836 | non-null | float64 |
+| timestamp | 100836 | non-null | int64 |
 
-Kemudian untuk melihat visualisasi dari banyaknya genre film, saya menggunakan skript berikut ini :
+Dari tabel 4 Variable Ratingg yang tertera diatas terdapat 4 kolom yang ada di variabel Ratingg yaitu userId, movieId, rating, dan timestamp. UserId, movieId, dan timestamp memiliki tipe data int64 sedangkan rating memiliki tipe data float64.
 
-word_could_dict = Counter(moviie['genres'].tolist())
-wordcloud = WordCloud(width = 2000, height = 1000).generate_from_frequencies(word_could_dict)
+Untuk melihat rating describe dan memudahkan dalam melihatnya saya visualisasikan menggunakan Table 5 visualisasi rating describe dibawah.
 
-plt.figure(figsize=(15,8))
-plt.imshow(wordcloud)
-plt.axis("off")
-plt.show()
+Table. 5 visualisasi rating describe
 
-Sehingga keluarannya sebagai berikut,
+|  | userId | movieId | rating | timestamp |
+| ------------ |---------------|---------------|---------------|---------------|
+| count | 100836.000000 | 100836.000000 | 100836.000000 | 1.008360e+05 |
+| mean | 326.127564 | 19435.295718 | 3.501557 | 1.205946e+09 |
+| std | 182.618491 | 35530.987199 | 1.042529 | 2.162610e+0 |
+| min | 1.000000 | 1.000000 | 0.500000 | 8.281246e+08 |
+| 25% | 177.000000 | 1199.000000 | 3.000000 | 1.019124e+09 |
+| 50% | 325.000000 | 2991.000000 | 3.500000 | 	1.186087e+09 |
+| 75% | 477.000000 | 8122.000000 | 4.000000 | 1.435994e+09 |
+| max | 610.000000 | 193609.000000 | 5.000000 | 1.537799e+09 |
 
-Gambar 1.6 visualisasi genre
+
+Kemudian untuk melihat visualisasi dari banyaknya genre film atau menampilkan rata-rata genre yg paling banyak muncul pada dataset.
+
+Gambar 3 visualisasi genre
 
 ![visualisasi data](https://user-images.githubusercontent.com/111235408/194400480-e955951c-50e6-473a-b31f-9aaa5f230296.png)
 
-Dalam tampilan gambar terliat bahwa film dengan genre commedi dan drama paling banyak diminati.
+Dalam tampilan Gambar 3 visualisasi genre terlihat bahwa film dengan genre commedi dan drama paling banyak diminati oleh pengguna.
+
+
+## Data Preprocessing
+
+- Menggabungkan Movie
+
+Menggabungkan beberapa file menggunakan fungsi concatenate berdasarkan pada movieId, dengan menggabungkan seluruh data pada variabel movie_all. Beberapa variabel yang digabungkan adalah sebagai berikut :
+
+   - linkk
+   - moviie
+   - ratingg
+   - tagg
+   
+Setelah itu mengurutkan data dan menghapus data yang sama menggunakan np. sort , sehingga dihasilkan jumlah seluruh data movie berdasarkan movieId terdapat 9742.
+
+- Menggabungkan Seluruh User
+
+Menggabungkan beberapa file menggunakan fungsi concatenate berdasarkan pada userId, menggabungkan seluruh data pada variabel user_all. Beberapa variabel yang digabungkan adalah sebagai berikut :
+
+   - rating
+   - tagg
+
+Setelah itu mengurutkan data dan menghapus data yang sama menggunakan np. sort , sehingga dihasilkan jumlah seluruh user 610.
+
+Menggabungkan file linkk, moviie, ratingg, dan tagg ke dalam dataframe moviie_info. Serta menggabungkan ratingg dengan dataframe moviie_info berdasarkan nilai movieId. Menggunakan fungsi concat.
+
+Setelah itu, mengecek missing value menggunakan fungsi isnull terhadap variabel moviie. Berikut ini Tabel. 6 Missing Value memudahkan dalam memahami variabel mana saja yang terdapat missing value :
+
+Tabel. 6 Missing Value
+
+|  |  | 
+| ------------ |---------------|
+| userId_x | 0 | 
+| movieId | 0 | 
+| rating_x | 0 | 
+| timestamp_x | 0 | 
+| imdbId | 6258749 | 
+| tmdbId | 6258749 | 
+| title | 6258749 | 
+| genres | 6258749 | 
+| userId_y | 201672 | 
+| rating_y | 434885 | 
+| timestamp_y | 201672 | 
+| tag | 6126372 | 
+
+Terlihat bahwa terdapat banyak missing value. Maka langkah selanjutnya adalah membersihkan missing value.
+
+- Menggabungkan rating dengan berdasar movieId
+
+Terdapat 9724 rows × 8 columns dalam penggabungan rating dengan berdasar movieId.
+
+- Menggabungkan Data dengan Fitur Nama Movie
+
+Mendefinisikan variabel all_moviie_rate dengan variabel ratingg.
+  
+Terdapat 100836 rows × 4 columns dalam penggabungan Data dengan Fitur Nama Movie.
 
 
 ## Data Preparation
 
-Mengatasi Missing Value, Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada missing value atau tidak.  Dengan menjalankan kode berikut.
+Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada missing value atau tidak.  Dengan menjalankan kode berikut.
 all_moviie.isnull().sum(). Dan ternyata hasilnya dalam tabel berikut ini :
 
-Tabel 1.2 cek missing value
+Tabel. 7 cek missing value
 
 | variabel | Banyaknya data |
 | ------------ |---------------| 
@@ -145,7 +228,21 @@ Tabel 1.2 cek missing value
 Perhatikanlah, sudah tidak terdapat missing value lagi setealah dilakukan penggabungan-penggabungan terhadap variabel. Selanjutnya, saya hanya akan menggunakan data unik untuk dimasukkan ke dalam proses pemodelan. Oleh karena itu, saya perlu menghapus data yang duplikat dengan fungsi drop_duplicates().
 
 - Proses dalam tahap data preparation adalah dengan menghapus Missing Value yang terdapat pada variabel.
-- Alasannya agar modelyang dibuat memilikitingkat prediksi yang bagus. Dan pada dasarnya, method dropna() bisa digunakan untuk menghapus baris atau kolom yang mengandung missing values. Saya hanya perlu menentukan axis-nya, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
+- Alasannya agar model yang dibuat memiliki tingkat prediksi yang bagus. 
+
+Mengembangkan sistem rekomendasi dengan pendekatan content based filtering. Tapi sebelumnya, mari cek lagi data yang kita miliki dan assign dataframe dari tahap sebelumnya ke dalam variabel data, sebagai berikut:
+
+Tabel. 8 assign dataframe 
+
+|  | movieId | title | genres |
+| ------------ |---------------|---------------|---------------|  
+| 8501 | 113705 | Two Days, One Night (Deux jours, une nuit) (2014) | Drama |
+| 9424 | 165969 | HyperNormalisation (2016) | Documentary |
+| 7291 | 75803 | Our Family Wedding (2010) | Comedy |
+| 2309 | 3061 | Holiday Inn (1942) | Comedy|Musical |
+| 9019 | 140525 | Secret in Their Eyes (2015) | Crime|Drama|Mystery |
+
+Dan pada dasarnya, method dropna() bisa digunakan untuk menghapus baris atau kolom yang mengandung missing values. Saya hanya perlu menentukan axis-nya, dimana 0 untuk menghapus baris dan 1 untuk menghapus kolom.
 
 ## Modeling
 
