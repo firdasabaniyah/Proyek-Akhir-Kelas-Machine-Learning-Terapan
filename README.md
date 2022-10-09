@@ -107,7 +107,7 @@ Tabel 3. variabel Linkss
 | imdbId |  9742 | non-null | int64 |
 | tmdbId | 9742 | non-null | float64 |
 
-Dari tabel 3 Variable Linkss yang tertera diatas terdapat 3 kolom yang ada di variabel Linkss yaitu movieId, imdbId, dan tmdbId. MovieId dan imdbId memiliki tipe data int64 sedangkan tmdbId memiliki tipe data float64.
+Dari tabel 3. Variable Linkss yang tertera diatas terdapat 3 kolom yang ada di variabel Linkss yaitu movieId, imdbId, dan tmdbId. MovieId dan imdbId memiliki tipe data int64 sedangkan tmdbId memiliki tipe data float64.
 
 - Variabel Ratingg
 
@@ -271,27 +271,6 @@ Dengan _cosine similarity_, saya berhasil mengidentifikasi kesamaan antara satu 
 
 Nah, dengan data kesamaan (_similarity_) _genre_ yang diperoleh dari kode sebelumnya, saya akan merekomendasikan daftar judul film yang mirip (_similar_) dengan _genre_ yang sebelumnya pernah melayani pengguna. 
 
-### Mendapatkan Rekomendasi
-
-Membuat fungsi moviie_recommendations dengan beberapa parameter sebagai berikut:
-
-Nama_moviie : Nama judul dari moviie tersebut (index kemiripan _dataframe_).
-_Similarity_data_ : _Dataframe_ mengenai similarity yang telah kita didefinisikan sebelumnya
-_Items_ : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah _movie_name_ dan _genre_.
-k : Banyak rekomendasi yang ingin diberikan.
-
-Hasil rekomendasi terdapat pada tabel 9. Hasil Rekomendasi
-
-Tabel 9. Hasil Rekomendasi 
-
-|  | movie_name | genres |
-| ------------ |---------------|---------------| 
-| 0 | Eyes of Tammy Faye, The (2000) | Documentary |
-| 1 | Why We Fight (2005) | Documentary |
-| 2 | Anne Frank Remembered (1995) | Documentary |
-| 3 | Deliver Us from Evil (2006) | Documentary |
-| 5 | Stone Reader (2002) | Documentary |
-
 
 ### Model Development dengan Collaborative Filtering
 
@@ -311,7 +290,7 @@ Selanjutnya, lakukan proses _compile_ terhadap model. Model ini menggunakan _Bin
 
 Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
 
-Tabel 10. Hasil Top-N
+Tabel 9. Hasil Top-N
 
 | movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
 | ------------ |---------------|---------------|---------------|---------------|---------------| 
@@ -330,6 +309,8 @@ Tabel 10. Hasil Top-N
 
 ### Mendapatkan Rekomendasi film
 
+- Content Based Filtering
+
 Untuk mendapatkan rekomendasi judul film, pertama saya ambil sampel _user_ secara acak dan definisikan variabel moviie_not_visited yang merupakan daftar judul film yang belum pernah dikunjungi oleh pengguna. Hal ini karena daftar moviie_not_visited inilah yang akan menjadi film yang akan rekomendasikan. 
 
 Sebelumnya, pengguna telah memberi rating pada beberapa film yang telah mereka kunjungi. saya menggunakan rating ini untuk membuat rekomendasi film yang mungkin cocok untuk pengguna. Nah, film yang akan direkomendasikan tentulah film yang belum pernah ditonton oleh pengguna. 
@@ -338,7 +319,7 @@ Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pa
 
 Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi _model.predict()_ dari _library Keras_.
 
-Tabel 11. Hasil Rekomendasi
+Tabel 10. Hasil Rekomendasi
 
 | Showing recommendations for users : 448 (Movie with high ratings from user) |  |
 | ------------ |---------------| 
@@ -347,7 +328,7 @@ Tabel 11. Hasil Rekomendasi
 | Annie Hal (1977) | (Comedy, Romance) | 
 | Back to The Future (1985) | (Adventure, Comed, Sci-Fi) | 
 
-Tabel 12. Top 10 Movie Recommendation
+Tabel 11. Top 10 Movie Recommendation
 
 | Top 10 Movie Recommendation |  | 
 | ------------ |---------------| 
@@ -361,6 +342,27 @@ Tabel 12. Top 10 Movie Recommendation
 | Strada, La (1954) | Drama |
 | Wild Parrots of Telegraph Hill, The (2003) | Documentary |
 | Captain Fantastic (2016) | Drama |
+
+- Collaborative Filtering
+
+Membuat fungsi moviie_recommendations dengan beberapa parameter sebagai berikut:
+
+Nama_moviie : Nama judul dari moviie tersebut (index kemiripan _dataframe_).
+_Similarity_data_ : _Dataframe_ mengenai similarity yang telah kita didefinisikan sebelumnya
+_Items_ : Nama dan fitur yang digunakan untuk mendefinisikan kemiripan, dalam hal ini adalah _movie_name_ dan _genre_.
+k : Banyak rekomendasi yang ingin diberikan.
+
+Hasil rekomendasi terdapat pada tabel 9. Hasil Rekomendasi
+
+Tabel 12. Hasil Rekomendasi 
+
+|  | movie_name | genres |
+| ------------ |---------------|---------------| 
+| 0 | Eyes of Tammy Faye, The (2000) | Documentary |
+| 1 | Why We Fight (2005) | Documentary |
+| 2 | Anne Frank Remembered (1995) | Documentary |
+| 3 | Deliver Us from Evil (2006) | Documentary |
+| 5 | Stone Reader (2002) | Documentary |
 
 
 ### Visualisasi Metrik
