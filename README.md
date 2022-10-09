@@ -207,7 +207,7 @@ Terdapat 100836 rows × 4 columns dalam penggabungan Data dengan Fitur Nama Movi
 
 Setelah proses penggabungan maka akan saya cek lagi datanya apakah ada _missing value_ atau tidak.  Dengan menjalankan kode berikut. _All_moviie.isnull().sum()_. Dan ternyata hasilnya dalam tabel berikut ini :
 
-Tabel 7. cek missing value
+Tabel 7. cek _missing value_
 
 | variabel | Banyaknya data |
 | ------------ |---------------| 
@@ -226,7 +226,7 @@ Perhatikanlah, sudah tidak terdapat _missing value_ lagi setelah dilakukan pengg
 
 Mengembangkan sistem rekomendasi dengan pendekatan _content based filtering_. Tapi sebelumnya, mari cek lagi data yang kita miliki dan _assign dataframe_ dari tahap sebelumnya ke dalam variabel data, sebagai berikut:
 
-Tabel 8. assign dataframe 
+Tabel 8. _Assign Dataframe_
 
 |  | movieId | title | genres |
 | ------------ |---------------|---------------|---------------|  
@@ -313,9 +313,9 @@ Selanjutnya, lakukan proses _compile_ terhadap model. Model ini menggunakan _Bin
 
 ### _Modelling_ dan _Resault_
 
-Berikut hasil Top-N tertera pada Tabel 11. Hasil Top-N
+Berikut hasil Top-N tertera pada Tabel 10. Hasil Top-N
 
-Tabel 11. Hasil Top-N
+Tabel 10. Hasil Top-N
 
 | movie_name | Gentleman's Agreement (1947) | Lady Vengeance (Sympathy for Lady Vengeance) (Chinjeolhan geumjassi) (2005) | Deadpool 2 (2018) | Better Off Dead... (1985) | Vertigo (1958) |
 | ------------ |---------------|---------------|---------------|---------------|---------------| 
@@ -342,7 +342,7 @@ Variabel moviie_not_visited diperoleh dengan menggunakan operator bitwise (~) pa
 
 Selanjutnya, untuk memperoleh rekomendasi film, gunakan fungsi _model.predict()_ dari _library Keras_.
 
-Tabel 12. Hasil Rekomendasi
+Tabel 11. Hasil Rekomendasi
 
 | Showing recommendations for users : 448 (Movie with high ratings from user) |  |
 | ------------ |---------------| 
@@ -351,7 +351,7 @@ Tabel 12. Hasil Rekomendasi
 | Annie Hal (1977) | (Comedy, Romance) | 
 | Back to The Future (1985) | (Adventure, Comed, Sci-Fi) | 
 
-Tabel 13. Top 10 Movie Recommendation
+Tabel 12. Top 10 Movie Recommendation
 
 | Top 10 Movie Recommendation |  | 
 | ------------ |---------------| 
