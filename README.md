@@ -243,7 +243,7 @@ Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perl
 
 ![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
 
-Gambar 6. Output Pembagian Data
+Gambar 4. Output Pembagian Data
 
 ## Modeling
 
@@ -257,13 +257,13 @@ Perhitungan idf pada data _genre_ dengan cara melakukan fit lalu ditransformasik
 
 ![matrix](https://user-images.githubusercontent.com/111235408/194685122-60f0aa0d-06ea-4b55-9e86-59dfe0371168.png)
 
-Gambar 4. _Matrix Tfidf_
+Gambar 5. _Matrix Tfidf_
 
 Selanjutnya, saya akan menghitung derajat kesamaan (_similarity degree_) antar _genre_ dengan teknik _cosine similarity_. Di sini, saya menggunakan fungsi _cosine_similarity_ dari _library_ sklearn. Berikut Gambar. 4 _Cosine Simmilarity_.
 
 ![cosine](https://user-images.githubusercontent.com/111235408/194685484-bc41f47b-f601-4435-92e6-94f322ba9e7b.png)
 
-Gambar 5. _Cosine Simmilarity_
+Gambar 6. _Cosine Simmilarity_
 
 Pada tahapan ini, saya menghitung _cosine similarity dataframe _tfidf matrix_ yang saya peroleh pada tahapan sebelumnya. Dengan satu baris kode untuk memanggil fungsi _cosine similarity_ dari _library sklearn_, saya telah berhasil menghitung kesamaan (_similarity_) antar _genre_. Kode di atas menghasilkan keluaran berupa matriks kesamaan dalam bentuk _array_. 
 
@@ -369,7 +369,7 @@ Untuk melihat visualisasi proses _training_, saya plot metrik evaluasi dengan _m
 
 ![model metrik](https://user-images.githubusercontent.com/111235408/194691167-b59a2337-8ccf-4f31-b8f4-d45a87ec5d48.png)
 
-Gambar 10. Visualisasi Metrik
+Gambar 7. Visualisasi Metrik
 
 Perhatikanlah pada Gambar. 10 visualisasi Metrik , proses training model cukup smooth dan model konvergen pada epochs sekitar 30. Dari proses ini, saya memperoleh nilai error akhir sebesar sekitar 0.1956 dan error pada data validasi sebesar 0.6132. Nilai tersebut cukup bagus untuk sistem rekomendasi. 
 
