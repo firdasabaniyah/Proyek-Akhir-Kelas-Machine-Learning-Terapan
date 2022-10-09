@@ -236,7 +236,14 @@ Tabel 8. _Assign Dataframe_
 | 2309 | 3061 | Holiday Inn (1942) | Comedy|Musical |
 | 9019 | 140525 | Secret in Their Eyes (2015) | Crime|Drama|Mystery |
 
+## Training dan Validasi metode _Collaborative Filtering_
 
+Tahap persiapan ini penting dilakukan agar data siap digunakan untuk pemodelan. Namun sebelumnya, saya perlu membagi data untuk training dan validasi terlebih dahulu.
+Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perlu memetakan (mapping) data genre dan movie menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. 
+
+![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
+
+Gambar 6. Output Pembagian Data
 
 ## Modeling
 
@@ -291,17 +298,6 @@ Tabel 9. Hasil Rekomendasi
 Sebelumnya saya telah menerapkan teknik _content based filtering_ pada data. Teknik ini merekomendasikan _item_ yang mirip dengan preferensi pengguna di masa lalu. Selanjutnya saya akan menerapkan teknik _collaborative filtering_ untuk membuat sistem rekomendasi. Teknik ini membutuhkan data rating dari _user_. 
 
 _Goal_ proyek kali ini adalah menghasilkan rekomendasi sejumlah judul film yang sesuai dengan preferensi pengguna berdasarkan rating yang telah diberikan sebelumnya. Dari data rating pengguna, saya akan mengidentifikasi restoran-restoran yang mirip dan belum pernah dikunjungi oleh pengguna untuk direkomendasikan.
-
-
- ## Training dan Validasi
-
-Tahap persiapan ini penting dilakukan agar data siap digunakan untuk pemodelan. Namun sebelumnya, saya perlu membagi data untuk training dan validasi terlebih dahulu.
-Bagi data train dan validasi dengan komposisi 80:20. Namun sebelumnya, saya perlu memetakan (mapping) data genre dan movie menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. 
-
-![pembagian data](https://user-images.githubusercontent.com/111235408/194687162-9caaf75f-9e78-49d0-a6ff-4396f4cc57fb.png)
-
-Gambar 6. Output Pembagian Data
-
 
 ### Proses Training 
 
@@ -366,15 +362,6 @@ Tabel 12. Top 10 Movie Recommendation
 | Wild Parrots of Telegraph Hill, The (2003) | Documentary |
 | Captain Fantastic (2016) | Drama |
 
-Berhasil memberikan rekomendasi kepada _user_. Sebagai contoh, hasil di atas Gambar. 7 Hasil Rekomendasi adalah rekomendasi untuk _user_ dengan 448. Dari _output_ tersebut, saya dapat membandingkan antara _movie with high ratings from user_ dan _Top 10 movie recommendation untuk user_. 
-
-Perhatikanlah, beberapa film rekomendasi menyediakan film dengan berdas kepada kategori _genre_  yang sesuai dengan rating _user_. Saya memperoleh 4 _movie with high ratings from user_ diantaranya :
-- Toy Story (1995) : Adventure|Animation|Children|Comedy|Fantasy
-- Raging Bull (1980) : Drama
-- Annie Hall (1977) : Comedy|Romance
-- Back to the Future (1985) : Adventure|Comedy|Sci-Fi masakan (cuisine). 
-
-Prediksinya cukup sesuai.
 
 ### Visualisasi Metrik
 
